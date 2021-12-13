@@ -87,7 +87,8 @@
     "redux": "^4.1.2",
     "redux-action": "^1.2.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.4.1"
+    "redux-thunk": "^2.4.1",
+    "webpack-sources": "^1.4.1"
   },
   "devDependencies": {
     "@types/webpack-env": "^1.13.6",

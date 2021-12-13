@@ -9,6 +9,7 @@ import { createLogger } from 'redux-logger'
 // 引入根reducers
 import rootReducer from '../reducers'
 
+
 const middlewares = [
   thunkMiddleware,
   createLogger()
