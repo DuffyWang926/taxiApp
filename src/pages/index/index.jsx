@@ -6,42 +6,34 @@ import { connect } from "../../utils/connect";
 import {
   getHomeDetail,
 } from "../../actions/home";
-@connect((state) => ({
-  state,
-}),
-(dispatch) => ({
-  getHomeDetail() {
-    dispatch(getHomeDetail());
+const mapStateToProps = (state)=>{
+  const { home } = state
+  const { name } = home
+    return {
+      name,
+    }
+
+}
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    getHomeDetail:(payload)=>{
+      dispatch(getHomeDetail(payload));
+    }
   }
-  
-}))
+}
+@connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
 
-  componentWillMount () { }
-
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   clickTest = () =>{
-    console.log('this')
+    console.log(this)
+    this.props.getHomeDetail({name:'222'})
   }
-
-  
 
   render () {
     return (
       <View className='index'>
         <Text onClick={() => this.clickTest()}>Hello world!</Text>
-        {/* <Text onClick={() => {
-          console.log('this')
-        }}>Hello world!</Text> */}
-
-
+        <Text >{this.props.name}</Text>
       </View>
     )
   }
