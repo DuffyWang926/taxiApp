@@ -9,7 +9,9 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: [],
+  plugins: [
+      'taro-plugin-platform-ks'
+  ],
   defineConstants: {
   },
   copy: {
