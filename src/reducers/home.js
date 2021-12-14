@@ -1,7 +1,7 @@
 
   
   const INITIAL_STATE = {
-    name: '12s3',
+    name: '12d3',
   }
   
   export default function home (state = INITIAL_STATE, action) {

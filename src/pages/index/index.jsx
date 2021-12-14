@@ -1,11 +1,13 @@
 import { Component } from 'react'
-import { View, Text } from '@tarojs/components'
+import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
 import {
   getHomeDetail,
 } from "../../actions/home";
+import SearchCom from "../../components/SearchCom";
+const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
   const { name } = home
@@ -29,10 +31,33 @@ export default class Index extends Component {
     this.props.getHomeDetail({name:'222'})
   }
 
+  
+
   render () {
+    const searchProps ={
+      url:'aa'
+    }
     return (
-      <View className='index'>
-        <Text onClick={() => this.clickTest()}>Hello world!</Text>
+      <View className='home'>
+        <Swiper
+          className='homeSwiper'
+          indicatorColor='#999'
+          indicatorActiveColor='#333'
+          vertical={false}
+          circular
+          indicatorDots
+          autoplay>
+          <SwiperItem >
+            <Image src={homeImg} className='homeImg' ></Image>
+          </SwiperItem>
+          <SwiperItem>
+            <Image src={homeImg} className='homeImg' ></Image>
+          </SwiperItem>
+        </Swiper>
+        <View className='homeSearch'>
+          <SearchCom props={searchProps}></SearchCom>
+        </View>
+
         <Text >{this.props.name}</Text>
       </View>
     )
