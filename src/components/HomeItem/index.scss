@@ -1,0 +1,21 @@
+.homeItem{
+    width: 100%;
+    height: 100%;
+    padding:10px;
+    box-sizing: border-box;
+   .itemTop{
+       height: 50px;
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+   }
+   .itemFoot{
+       display: flex;
+       justify-content: space-between;
+   }
+   .itemImg{
+       width: 30%;
+       height: 200px;
+   }
+
+}
