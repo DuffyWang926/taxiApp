@@ -13,12 +13,11 @@ const SearchCom = ({props}) => {
         url
       });
     }
-    debugger
   }
 
   return (
     <View className="searchBox" onClick={ () =>{boxClick()}}>
-      <Input className="searchInput" placeholder="请输入关键字"  	 ></Input>
+      <Input className="searchInput" placeholder="请输入关键字"></Input>
       <Text className="searchTxt">搜索</Text>
     </View>
   );

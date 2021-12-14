@@ -7,6 +7,7 @@ import {
   getHomeDetail,
 } from "../../actions/home";
 import SearchCom from "../../components/SearchCom";
+import HomeItem from "../../components/HomeItem";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -31,12 +32,46 @@ export default class Index extends Component {
     this.props.getHomeDetail({name:'222'})
   }
 
+  itemList = [
+    {
+      title:'remen',
+      type:0,
+      imgList:[
+        {
+          id:'1',
+          url:'',
+          type:'',
+          name:'',
+          emotion:''
+        }
+      ]
+    },
+    {
+      title:'remen',
+      type:0,
+      imgList:[1,1,1]
+    },
+    {
+      title:'remen',
+      type:0,
+      imgList:[1,1,1]
+    }
+      
+  ]
+  itemListView = this.itemList.length > 0 && this.itemList.map( (v,i) =>{
+    let res = (
+      <HomeItem props={v}></HomeItem>
+    )
+    return res
+  })
+
   
 
   render () {
     const searchProps ={
-      url:'aa'
+      url:''
     }
+    
     return (
       <View className='home'>
         <Swiper
@@ -57,8 +92,9 @@ export default class Index extends Component {
         <View className='homeSearch'>
           <SearchCom props={searchProps}></SearchCom>
         </View>
-
-        <Text >{this.props.name}</Text>
+        <View className='homeList'>
+          { this.itemListView }
+        </View>
       </View>
     )
   }
