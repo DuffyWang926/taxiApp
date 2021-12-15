@@ -6,9 +6,7 @@ import { connect } from "../../utils/connect";
 import {
   getHomeDetail,
 } from "../../actions/home";
-// import { AtTabBar } from "taro-ui";
-import SearchCom from "../../components/SearchCom";
-import HomeItem from "../../components/HomeItem";
+import ImageCom from "../../components/ImageCom";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -27,12 +25,7 @@ const mapDispatchToProps = (dispatch) =>{
 }
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
-
-  clickTest = () =>{
-    console.log(this)
-    this.props.getHomeDetail({name:'222'})
-  }
-
+ 
   itemList = [
     {
       title:'remen',
@@ -61,50 +54,33 @@ export default class Index extends Component {
   ]
   itemListView = this.itemList.length > 0 && this.itemList.map( (v,i) =>{
     let res = (
-      <HomeItem props={v}></HomeItem>
+      <ImageCom className='searchImg' props={v}></ImageCom>
     )
     return res
   })
 
+  searchClick = (val) =>{
+    debugger
+
+  }
   
 
   render () {
     const searchProps ={
-      url:'/pages/search/index'
+      searchClick:this.searchClick
     }
+    
     return (
-      <View className='home'>
-        <Swiper
-          className='homeSwiper'
-          indicatorColor='#999'
-          indicatorActiveColor='#333'
-          vertical={false}
-          circular
-          indicatorDots
-          autoplay>
-          <SwiperItem >
-            <Image src={homeImg} className='homeImg' ></Image>
-          </SwiperItem>
-          <SwiperItem>
-            <Image src={homeImg} className='homeImg' ></Image>
-          </SwiperItem>
-        </Swiper>
-        <View className='homeSearch'>
-          <SearchCom props={searchProps}></SearchCom>
+      <View className='product'>
+        <View className='productTop'>
+          <Image
+            className='productImg'
+            src={homeImg}
+          ></Image>
         </View>
-        <View className='homeList'>
+        <View className='productList'>
           { this.itemListView }
         </View>
-        {/* <AtTabBar
-          fixed
-          selectedColor="#d43c33"
-          tabList={[
-            { title: "发现", iconPrefixClass: "fa", iconType: "feed" },
-            { title: "我的", iconPrefixClass: "fa", iconType: "music" }
-          ]}
-          // onClick={this.switchTab.bind(this)}
-          // current={this.state.current}
-        /> */}
       </View>
     )
   }
