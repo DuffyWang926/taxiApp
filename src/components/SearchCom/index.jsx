@@ -1,12 +1,13 @@
 import Taro from "@tarojs/taro";
 import { View, Input, Text } from "@tarojs/components";
-
+import { useState } from "react";
 import "./index.scss";
 
 
 
 const SearchCom = ({props}) => {
-  const { url } = props
+  const { url, searchClick } = props
+  const [inputVal, setInputVal] = useState("");
   const boxClick = () =>{
     if(url){
       Taro.navigateTo({
@@ -14,11 +15,32 @@ const SearchCom = ({props}) => {
       });
     }
   }
+  const inputChange = (e) =>{
+    const { value } = e.detail;
+    setInputVal(value)
+  }
+
+  const onSearchClick = () =>{
+    if(url){
+      boxClick
+    }else{
+      searchClick(inputVal)
+    }
+  }
 
   return (
     <View className="searchBox" onClick={ () =>{boxClick()}}>
-      <Input className="searchInput" placeholder="请输入关键字"></Input>
-      <Text className="searchTxt">搜索</Text>
+      <Input 
+        className="searchInput"
+        placeholder="请输入关键字"
+        onInput={(e) => {
+          inputChange(e);
+        }}
+      ></Input>
+      <Text
+        className="searchTxt"
+        onClick={ () =>{onSearchClick()}}
+      >搜索</Text>
     </View>
   );
 };
