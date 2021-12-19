@@ -1,5 +1,5 @@
 var config = {
-    dialect: 'mysql',
+    // dialect: 'mysql',
     database: 'test',
     username: 'wefRoot',
     password: 'wefRoot',

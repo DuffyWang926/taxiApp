@@ -1,10 +1,40 @@
-var fn_index = async (ctx, next) => {
-    ctx.response.body = `<h1>Index</h1>
-        <form action="/signin" method="post">
-            <p>Name: <input name="name" value="koa"></p>
-            <p>Password: <input name="password" type="password"></p>
-            <p><input type="submit" value="Submit"></p>
-        </form>`;
+const model = require('../model');
+
+const fn_index = async (ctx, next) => {
+    let userModel = model.user
+    
+    // (async () => {
+//     var dog = await Pet.create({
+//         id: 'd-' + now,
+//         name: 'Odie',
+//         gender: false,
+//         birth: '2008-08-08',
+//         createdAt: now,
+//         updatedAt: now,
+//         version: 0
+//     });
+//     console.log('created: ' + JSON.stringify(dog));
+// })();
+
+    let users = await  userModel.findAll({
+        where: {
+        }
+    })
+    console.log(`find ${users} users:`);
+
+    // let users = userModel.findAll({
+    //     where: {
+    //     }
+    // }).then(function (p) {
+    //     console.log('created.' + JSON.stringify(p));
+    // }).catch(function (err) {
+    //     console.log('failed: ' + err);
+    // });
+    // console.log(`find ${users} users:`);
+    
+    ctx.response.body = {
+        data:users
+    }
 };
 
 var fn_signin = async (ctx, next) => {
