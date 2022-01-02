@@ -2,35 +2,12 @@ const model = require('../model');
 
 const fn_index = async (ctx, next) => {
     let userModel = model.user
-    
-    // (async () => {
-//     var dog = await Pet.create({
-//         id: 'd-' + now,
-//         name: 'Odie',
-//         gender: false,
-//         birth: '2008-08-08',
-//         createdAt: now,
-//         updatedAt: now,
-//         version: 0
-//     });
-//     console.log('created: ' + JSON.stringify(dog));
-// })();
 
     let users = await  userModel.findAll({
         where: {
         }
     })
     console.log(`find ${users} users:`);
-
-    // let users = userModel.findAll({
-    //     where: {
-    //     }
-    // }).then(function (p) {
-    //     console.log('created.' + JSON.stringify(p));
-    // }).catch(function (err) {
-    //     console.log('failed: ' + err);
-    // });
-    // console.log(`find ${users} users:`);
     
     ctx.response.body = {
         data:users
