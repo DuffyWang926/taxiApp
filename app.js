@@ -3,7 +3,7 @@ const app = new Koa();
 const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser');
 const controller = require('./controller');
-
+const cors = require('koa2-cors')
 
 
 
@@ -57,7 +57,7 @@ const controller = require('./controller');
 
 
 
-
+app.use(cors());
 app.use(bodyParser());
 app.use(controller());
 

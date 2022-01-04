@@ -8,6 +8,7 @@ const fn_index = async (ctx, next) => {
         }
     })
     console.log(`find ${users} users:`);
+    ctx.response.headers['Access-Control-Allow-Origin'] = '*'
     
     ctx.response.body = {
         data:users
