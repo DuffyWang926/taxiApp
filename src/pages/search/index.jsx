@@ -56,7 +56,6 @@ export default class Index extends Component {
   })
 
   searchClick = (val) =>{
-    debugger
 
   }
   

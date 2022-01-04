@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
+import { View, TabBar, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
@@ -9,6 +9,8 @@ import {
 // import { AtTabBar } from "taro-ui";
 import SearchCom from "../../components/SearchCom";
 import HomeItem from "../../components/HomeItem";
+import TapCom from "../../components/TapCom";
+
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -60,6 +62,7 @@ export default class Index extends Component {
       
   ]
   itemListView = this.itemList.length > 0 && this.itemList.map( (v,i) =>{
+    v.url = '/pages/productList/index'
     let res = (
       <HomeItem props={v}></HomeItem>
     )
@@ -95,16 +98,8 @@ export default class Index extends Component {
         <View className='homeList'>
           { this.itemListView }
         </View>
-        {/* <AtTabBar
-          fixed
-          selectedColor="#d43c33"
-          tabList={[
-            { title: "发现", iconPrefixClass: "fa", iconType: "feed" },
-            { title: "我的", iconPrefixClass: "fa", iconType: "music" }
-          ]}
-          // onClick={this.switchTab.bind(this)}
-          // current={this.state.current}
-        /> */}
+        <View onClick={() => { this.clickTest()}}>{this.props.name}</View>
+        <TapCom></TapCom>
       </View>
     )
   }

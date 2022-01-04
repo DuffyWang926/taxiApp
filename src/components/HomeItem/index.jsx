@@ -15,7 +15,6 @@ const HomeItem = ({props}) => {
       });
     }
   }
-  debugger
   
   const imgListView =  imgList.length > 0 && imgList.map( (v,i) =>{
     let res = (

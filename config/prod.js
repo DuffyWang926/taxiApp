@@ -1,6 +1,7 @@
 module.exports = {
   env: {
-    NODE_ENV: '"production"'
+    NODE_ENV: '"production"',
+    BASE_URL:'"http://123.56.142.18:3000/"'
   },
   defineConstants: {
   },
