@@ -7,6 +7,7 @@ import {
   getHomeDetail,
 } from "../../actions/home";
 import ImageCom from "../../components/ImageCom";
+import Taro from "@tarojs/taro";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -25,6 +26,13 @@ const mapDispatchToProps = (dispatch) =>{
 }
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
+
+  componentDidMount(){
+    Taro.setNavigationBarTitle({
+      title:'热门表情包'
+    })
+  }
+  
  
   itemList = [
     {
@@ -59,25 +67,11 @@ export default class Index extends Component {
     return res
   })
 
-  searchClick = (val) =>{
-
-  }
-  
 
   render () {
-    const searchProps ={
-      searchClick:this.searchClick
-    }
-    
     return (
-      <View className='product'>
-        <View className='productTop'>
-          <Image
-            className='productImg'
-            src={homeImg}
-          ></Image>
-        </View>
-        <View className='productList'>
+      <View className='productList'>
+        <View className='productBox'>
           { this.itemListView }
         </View>
       </View>

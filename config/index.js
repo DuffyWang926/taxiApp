@@ -1,4 +1,5 @@
 const config = {
+  
   projectName: 'myApp',
   date: '2021-12-10',
   designWidth: 750,
@@ -9,6 +10,15 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
+  // alias: {
+  //   '@actions': path.resolve(__dirname, '..', 'src/actions'),
+  //   '@assets': path.resolve(__dirname, '..', 'src/assets'),
+  //   '@components': path.resolve(__dirname, '..', 'src/components'),
+  //   '@constants': path.resolve(__dirname, '..', 'src/constants'),
+  //   '@reducers': path.resolve(__dirname, '..', 'src/reducers'),
+  //   '@styles': path.resolve(__dirname, '..', 'src/styles'),
+  //   '@utils': path.resolve(__dirname, '..', 'src/utils')
+  // },
   plugins: [
       'taro-plugin-platform-ks'
   ],
@@ -60,12 +70,14 @@ const config = {
           generateScopedName: '[name]__[local]___[hash:base64:5]'
         }
       }
-    }
+    },
+    // esnextModules: ['taro-ui']
   }
 }
 
 module.exports = function (merge) {
   if (process.env.NODE_ENV === 'development') {
+    
     return merge({}, config, require('./dev'))
   }
   return merge({}, config, require('./prod'))

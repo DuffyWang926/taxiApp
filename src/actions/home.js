@@ -1,9 +1,22 @@
   
+  import api from '../services/api'
   export const getHomeDetail = (payload) => {
-    return {
-              type: 'HOMEDETAIL',
-              payload
-            }
+
+    // return {
+    //           type: 'HOMEDETAIL',
+    //           payload
+    //         }
+    debugger
+    return dispatch => {
+      api.get('',).then((res) => {
+        dispatch({
+          type: 'HOMEDETAIL',
+          payload: {
+            res
+          }
+        })
+      })
+    }
   }
   
 //   export const getPlayListDetail = (payload) => {
