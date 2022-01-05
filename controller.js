@@ -1,4 +1,5 @@
 const fs = require('fs');
+const multer = require('@koa/multer')
 
 function addMapping(router, mapping) {
     for (var url in mapping) {
@@ -7,7 +8,11 @@ function addMapping(router, mapping) {
             router.get(path, mapping[url]);
         } else if (url.startsWith('POST ')) {
             var path = url.substring(5);
-            router.post(path, mapping[url]);
+            if(path.includes('upload')){
+                router.post(path, multer().single('gif'),mapping[url]);
+            }else{
+                router.post(path, mapping[url]);
+            }
         } else {
             console.log(`invalid URL: ${url}`);
         }
