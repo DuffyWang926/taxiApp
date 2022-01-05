@@ -23,6 +23,12 @@
           "pathName": "pages/product/index",
           "query": "id=1",
           "scene": null
+        },
+        {
+          "name": "pages/upload/index",
+          "pathName": "pages/upload/index",
+          "query": "",
+          "scene": null
         }
       ]
     }
