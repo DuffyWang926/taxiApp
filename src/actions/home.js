@@ -1,19 +1,11 @@
   
   import api from '../services/api'
   export const getHomeDetail = (payload) => {
-
-    // return {
-    //           type: 'HOMEDETAIL',
-    //           payload
-    //         }
-    debugger
     return dispatch => {
-      api.get('',).then((res) => {
+      api.get('/home',).then((res) => {
         dispatch({
           type: 'HOMEDETAIL',
-          payload: {
-            res
-          }
+          payload: res
         })
       })
     }

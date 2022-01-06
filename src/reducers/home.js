@@ -1,16 +1,16 @@
 
   
   const INITIAL_STATE = {
-    name: '12d3',
+    itemList: [],
   }
   
   export default function home (state = INITIAL_STATE, action) {
     switch (action.type) {
       case "HOMEDETAIL":
-        const { name } = action.payload
+        const { data } = action.payload
         return {
           ...state,
-          name
+          itemList:data
         }
       default:
         return state

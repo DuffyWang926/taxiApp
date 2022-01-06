@@ -14,9 +14,10 @@ import TapCom from "../../components/TapCom";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
-  const { name } = home
+  const { itemList } = home
+  debugger
     return {
-      name,
+      itemList,
     }
 
 }
@@ -30,48 +31,53 @@ const mapDispatchToProps = (dispatch) =>{
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
 
-  clickTest = () =>{
-    console.log(this)
-    this.props.getHomeDetail({name:'222'})
+  componentDidMount(){
+    this.props.getHomeDetail()
   }
 
-  itemList = [
-    {
-      title:'remen',
-      type:0,
-      imgList:[
-        {
-          id:'1',
-          url:'',
-          type:'',
-          name:'',
-          emotion:''
-        }
-      ]
-    },
-    {
-      title:'remen',
-      type:0,
-      imgList:[1,1,1]
-    },
-    {
-      title:'remen',
-      type:0,
-      imgList:[1,1,1]
-    }
+  
+
+  
+
+  // itemList = [
+  //   {
+  //     title:'remen',
+  //     type:0,
+  //     imgList:[
+  //       {
+  //         id:'1',
+  //         url:'',
+  //         type:'',
+  //         name:'',
+  //         emotion:''
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     title:'remen',
+  //     type:0,
+  //     imgList:[1,1,1]
+  //   },
+  //   {
+  //     title:'remen',
+  //     type:0,
+  //     imgList:[1,1,1]
+  //   }
       
-  ]
-  itemListView = this.itemList.length > 0 && this.itemList.map( (v,i) =>{
-    v.url = '/pages/productList/index'
-    let res = (
-      <HomeItem props={v}></HomeItem>
-    )
-    return res
-  })
+  // ]
+  
 
   
 
   render () {
+    const { itemList } = this.props
+    const itemListView = this.props.itemList.length > 0 && this.props.itemList.map( (v,i) =>{
+      v.url = '/pages/productList/index'
+      let res = (
+        <HomeItem props={v}></HomeItem>
+      )
+      return res
+    })
     const searchProps ={
       url:'/pages/search/index'
     }
@@ -96,9 +102,8 @@ export default class Index extends Component {
           <SearchCom props={searchProps}></SearchCom>
         </View>
         <View className='homeList'>
-          { this.itemListView }
+          { itemListView }
         </View>
-        <View onClick={() => { this.clickTest()}}>{this.props.name}</View>
         <TapCom></TapCom>
       </View>
     )
