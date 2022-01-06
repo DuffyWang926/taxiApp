@@ -2,12 +2,10 @@ import Taro from "@tarojs/taro";
 import { View, Image } from "@tarojs/components";
 
 import "./index.scss";
-const homeImg = require("../../assets/thanks.jpg")
 
 
 const ImageCom = ({props}) => {
-  const { id  } = props
-  
+  const { id, imgUrl  } = props
 
   const onImgClick = () =>{
     Taro.navigateTo({
@@ -18,7 +16,7 @@ const ImageCom = ({props}) => {
   return (
     <View className="imageCom" >
       <Image
-       src={homeImg}
+       src={imgUrl}
        onClick = { () => {onImgClick()}}
        className="imageComImg"
       ></Image>

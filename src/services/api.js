@@ -5,7 +5,7 @@ import { logError } from '../utils/error'
 // import {baseUrl} from '../../config'
 
 // const baseUrl= 'http://123.56.142.18:3000/'
-const baseUrl= 'http://192.168.0.104:3000/'
+const baseUrl= 'http://192.168.0.104:3000'
 
 
 export default {
