@@ -25,7 +25,7 @@ const fn_home = async (ctx, next) => {
     let imgList = Array.isArray(products) && products.map( (v,i) =>{
         let res = {
             imgId:v.id,
-            imgUrl:v.url,
+            imgUrl:v.imgUrl,
             title:v.title,
             author:v.author,
             downSum:v.sum
@@ -35,12 +35,17 @@ const fn_home = async (ctx, next) => {
     let dataRes = [
         {
             title:'热门',
+            itemType:1,
             imgList
-        }
+        },
+        {
+            title:'最新',
+            itemType:2,
+            imgList
+        },
     ]
-    ctx.response.body = {
-        data:dataRes
-    }
+    ctx.response.body = dataRes
+    
 };
 
 
@@ -64,4 +69,5 @@ module.exports = {
     'GET /home': fn_home,
     'GET /banner': fn_banner,
     'POST /signin': fn_signin,
+    // 'GET /product': fn_home
 };

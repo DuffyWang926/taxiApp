@@ -1,20 +1,39 @@
 const fs = require('fs')
+const model = require('../model');
 var fn_upload = async (ctx, next) => {
-   console.log(ctx.request.body)
-   let body = ctx.request.body
-   const { type, name, theme} = body
-   let fileBuffer = ctx.file.buffer
-   console.log(ctx.file);
-   let code = 200
-   let filePath = '../imgs/' + name + '.gif'
+    let body = ctx.request.body
+    const { type, name, theme} = body
+    let fileBuffer = ctx.file.buffer
+    let now = new Date().getTime() + ''
+    let code = 200
+    let writePath = '../products/' + now + '.gif'
+    let filePath = 'http://192.168.0.104:3000/product/' + now
+    try{
+        fs.writeFile(writePath, fileBuffer, function(err) {
+            if (err) {
+                throw err;
+            }
+        });
 
-   fs.writeFile(filePath, fileBuffer, function(err) {
-    if (err) {
-        throw err;
+    }catch{
+
     }
-    // 写入成功后读取测试
+    console.log('end')
+
+    let productModel = model.product
     
-});
+    let products = await  productModel.create({
+        productId:now,
+        imgUrl: filePath,
+        type,
+        author: 'a',
+        title: name,
+        description: '',
+        createdAt: now,
+        updatedAt: now,
+    })
+
+   
 
 
 

@@ -8,7 +8,6 @@ module.exports = db.defineModel('products', {
     title: db.STRING(40),
     description: db.STRING(100),
     createdAt: db.STRING(40),
-    createdAt: db.STRING(40),
     updatedAt: db.STRING(40),
 });
 
