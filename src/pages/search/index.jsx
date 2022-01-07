@@ -4,63 +4,52 @@ import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './index.scss'
 import { connect } from "../../utils/connect";
 import {
-  getHomeDetail,
-} from "../../actions/home";
+  postSearchList,
+} from "../../actions/search";
 import SearchCom from "../../components/SearchCom";
 import ImageCom from "../../components/ImageCom";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
-  const { home } = state
-  const { name } = home
+  const { search } = state
+  const { imgList } = search
     return {
-      name,
+      imgList,
     }
 
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    getHomeDetail:(payload)=>{
-      dispatch(getHomeDetail(payload));
+    postSearchList:(payload)=>{
+      dispatch(postSearchList(payload));
     }
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
- 
-  imgList = [
-    
-    {
-      id:'1',
-      url:'',
-      type:'',
-      name:'',
-      emotion:''
-    },
-    {
-      id:'1',
-      url:'',
-      type:'',
-      name:'',
-      emotion:''
-    },
-      
-  ]
-  imgListView = this.imgList.length > 0 && this.imgList.map( (v,i) =>{
-    let res = (
-      <ImageCom 
-        className='searchImg'
-        props={v}
-      ></ImageCom>
-    )
-    return res
-  })
 
+  componentDidMount(){
+    this.props.postSearchList()
+  }
+ 
   searchClick = (val) =>{
+    this.props.postSearchList({
+      keyword:val
+    })
 
   }
   
 
   render () {
+    const { imgList } = this.props
+    let imgListView = imgList.length > 0 && imgList.map( (v,i) =>{
+      let res = (
+        <ImageCom 
+          className='searchImg'
+          props={v}
+        ></ImageCom>
+      )
+      return res
+    })
     const searchProps ={
       searchClick:this.searchClick
     }
@@ -71,7 +60,7 @@ export default class Index extends Component {
           <SearchCom props={searchProps}></SearchCom>
         </View>
         <View className='searchList'>
-          { this.imgListView }
+          { imgListView }
         </View>
       </View>
     )
