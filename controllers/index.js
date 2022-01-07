@@ -1,4 +1,5 @@
 const model = require('../model');
+const _ = require('lodash')
 
 const fn_banner = async (ctx, next) => {
     let productModel = model.user
@@ -28,20 +29,32 @@ const fn_home = async (ctx, next) => {
             imgUrl:v.imgUrl,
             title:v.title,
             author:v.author,
-            downSum:v.sum
+            downSum:v.sum,
+            updatedAt:v.updatedAt
         }
         return res
     })
+    imgList.sort((a,b) =>{
+        return a.downSum - b.downSum
+    })
+    let imgListEnd = imgList.slice(0,3)
+    let nextList = _.cloneDeep(imgList)
+    nextList.sort((a,b) =>{
+        return a.updatedAt - b.updatedAt
+    })
+    let newList = nextList.slice(0,3)
+    console.log(imgList)
+    console.log(nextList)
     let dataRes = [
         {
             title:'热门',
-            itemType:1,
-            imgList
+            type:1,
+            imgList:imgListEnd
         },
         {
             title:'最新',
-            itemType:2,
-            imgList
+            type:2,
+            imgList:newList
         },
     ]
     ctx.response.body = dataRes

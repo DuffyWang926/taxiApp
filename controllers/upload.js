@@ -21,14 +21,16 @@ var fn_upload = async (ctx, next) => {
     console.log('end')
 
     let productModel = model.product
+    let sum = parseInt(+now/10) + ''
     
-    let products = await  productModel.create({
+    await  productModel.create({
         productId:now,
         imgUrl: filePath,
         type,
         author: 'a',
         title: name,
         description: '',
+        sum,
         createdAt: now,
         updatedAt: now,
     })
