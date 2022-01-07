@@ -15,7 +15,6 @@ const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
   const { itemList } = home
-  debugger
     return {
       itemList,
     }
@@ -39,42 +38,18 @@ export default class Index extends Component {
 
   
 
-  // itemList = [
-  //   {
-  //     title:'remen',
-  //     type:0,
-  //     imgList:[
-  //       {
-  //         id:'1',
-  //         url:'',
-  //         type:'',
-  //         name:'',
-  //         emotion:''
-  //       }
-  //     ]
-  //   },
-  //   {
-  //     title:'remen',
-  //     type:0,
-  //     imgList:[1,1,1]
-  //   },
-  //   {
-  //     title:'remen',
-  //     type:0,
-  //     imgList:[1,1,1]
-  //   }
-      
-  // ]
+
   
 
   
 
   render () {
     const { itemList } = this.props
-    const itemListView = this.props.itemList.length > 0 && this.props.itemList.map( (v,i) =>{
+    debugger
+    const itemListView = itemList.length > 0 && itemList.map( (v,i) =>{
       v.url = '/pages/productList/index'
       let res = (
-        <HomeItem props={v}></HomeItem>
+        <HomeItem key={v.type} props={v}></HomeItem>
       )
       return res
     })
@@ -91,10 +66,10 @@ export default class Index extends Component {
           circular
           indicatorDots
           autoplay>
-          <SwiperItem >
+          <SwiperItem key='SwiperItem1'>
             <Image src={homeImg} className='homeImg' ></Image>
           </SwiperItem>
-          <SwiperItem>
+          <SwiperItem key='SwiperItem2'>
             <Image src={homeImg} className='homeImg' ></Image>
           </SwiperItem>
         </Swiper>

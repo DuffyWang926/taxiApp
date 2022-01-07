@@ -150,7 +150,7 @@ export default class Index extends Component {
     const { radioList, imgUrl } = this.state
     const radioNode = Array.isArray(radioList) && radioList.map( (v,i) =>{
       let res = (
-        <Radio className='topRadio' value={v.value} checked={v.checked}>{v.text}</Radio>
+        <Radio className='topRadio' key={v.value} value={v.value} checked={v.checked}>{v.text}</Radio>
       )
       return res
     })
@@ -190,13 +190,11 @@ export default class Index extends Component {
           onClick = {(e) => {
               this.onUpload(e);
             }}>
-          <View
-            class="uploaderText"
-            >
+          <View >
             <Text>上传图片</Text>
           </View>
-          <View class="uploaderImgBox" >
-            <Image class="uploaderImage" src={imgUrl} bindtap="previewImg"></Image>
+          <View  >
+            <Image src={imgUrl} bindtap="previewImg"></Image>
           </View>
         </View>
         

@@ -19,12 +19,14 @@ const HomeItem = ({props}) => {
   const imgListView =  imgList.length > 0 && imgList.map( (v,i) =>{
     let res = (
       <ImageCom
-       className="itemImg"
-       props={v}
+        key={v.id}
+        className="itemImg"
+        props={v}
       ></ImageCom>
     )
     return res
   })
+  debugger
 
   return (
     <View className="homeItem" >
