@@ -4,27 +4,33 @@ import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './index.scss'
 import { connect } from "../../utils/connect";
 import {
-  getHomeDetail,
-} from "../../actions/home";
+  postSearchList,
+} from "../../actions/search";
 import ImageCom from "../../components/ImageCom";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
-  const { home } = state
-  const { name } = home
+  const { search } = state
+  const { imgList } = search
     return {
-      name,
+      imgList,
     }
 
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    getHomeDetail:(payload)=>{
-      dispatch(getHomeDetail(payload));
+    postSearchList:(payload)=>{
+      dispatch(postSearchList(payload));
     }
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
+
+  componentDidMount(){
+    this.props.postSearchList()
+  }
+
+
  
   itemList = [
     {
