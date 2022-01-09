@@ -1,25 +1,34 @@
 import { Component } from 'react'
+import Taro, { getCurrentInstance } from '@tarojs/taro'
 import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
 import {
-  postSearchList,
-} from "../../actions/search";
+  postProduct,
+} from "../../actions/product";
+import {
+  postProductList,
+} from "../../actions/productList";
 import ImageCom from "../../components/ImageCom";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
-  const { search } = state
-  const { imgList } = search
+  const { product, productList } = state
+  const { productListData } = productList
+  const { productData } = product
     return {
-      imgList,
+      productData,
+      productListData
     }
 
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    postSearchList:(payload)=>{
-      dispatch(postSearchList(payload));
+    postProduct:(payload)=>{
+      dispatch(postProduct(payload));
+    },
+    postProductList:(payload)=>{
+      dispatch(postProductList(payload));
     }
   }
 }
@@ -27,64 +36,38 @@ const mapDispatchToProps = (dispatch) =>{
 export default class Index extends Component {
 
   componentDidMount(){
-    this.props.postSearchList()
-  }
-
-
- 
-  itemList = [
-    {
-      title:'remen',
+    const { id } = getCurrentInstance()?.router?.params || {};
+    this.props.postProduct({
+      id
+    })
+    this.props.postProductList({
       type:0,
-      imgList:[
-        {
-          id:'1',
-          url:'',
-          type:'',
-          name:'',
-          emotion:''
-        }
-      ]
-    },
-    {
-      title:'remen',
-      type:0,
-      imgList:[1,1,1]
-    },
-    {
-      title:'remen',
-      type:0,
-      imgList:[1,1,1]
-    }
-      
-  ]
-  itemListView = this.itemList.length > 0 && this.itemList.map( (v,i) =>{
-    let res = (
-      <ImageCom className='searchImg' props={v}></ImageCom>
-    )
-    return res
-  })
-
-  searchClick = (val) =>{
-
+      size:3
+    })
   }
   
 
   render () {
-    const searchProps ={
-      searchClick:this.searchClick
-    }
+    const { imgUrl } = this.props.productData
+    const { productListData } = this.props
+    let itemListView = productListData.length > 0 && productListData.map( (v,i) =>{
+      let res = (
+        <ImageCom key={v.imgUrl} className='searchImg' props={v}></ImageCom>
+      )
+      return res
+    })
+   
     
     return (
       <View className='product'>
         <View className='productTop'>
           <Image
             className='productImg'
-            src={homeImg}
+            src={imgUrl}
           ></Image>
         </View>
         <View className='productList'>
-          { this.itemListView }
+          { itemListView }
         </View>
       </View>
     )
