@@ -48,12 +48,12 @@ const fn_home = async (ctx, next) => {
     let dataRes = [
         {
             title:'热门',
-            type:1,
+            type:0,
             imgList:imgListEnd
         },
         {
             title:'最新',
-            type:2,
+            type:1,
             imgList:newList
         },
     ]
