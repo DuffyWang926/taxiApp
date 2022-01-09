@@ -14,9 +14,10 @@ import TapCom from "../../components/TapCom";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
-  const { itemList } = home
+  const { itemList, tapCurrent } = home
     return {
       itemList,
+      tapCurrent
     }
 
 }
@@ -24,7 +25,8 @@ const mapDispatchToProps = (dispatch) =>{
   return {
     getHomeDetail:(payload)=>{
       dispatch(getHomeDetail(payload));
-    }
+    },
+    
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
@@ -33,6 +35,7 @@ export default class Index extends Component {
   componentDidMount(){
     this.props.getHomeDetail()
   }
+  
 
   
 
@@ -55,6 +58,7 @@ export default class Index extends Component {
     const searchProps ={
       url:'/pages/search/index'
     }
+    
     return (
       <View className='home'>
         <Swiper
@@ -78,7 +82,7 @@ export default class Index extends Component {
         <View className='homeList'>
           { itemListView }
         </View>
-        <TapCom></TapCom>
+        <TapCom ></TapCom>
       </View>
     )
   }

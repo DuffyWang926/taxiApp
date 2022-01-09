@@ -59,6 +59,7 @@
       },
       
     ],
+    tapCurrent:0
   }
   
   export default function home (state = INITIAL_STATE, action) {
@@ -68,6 +69,13 @@
         return {
           ...state,
           itemList:data
+        }
+      case "CHANGEHOMEDATA":
+        const { tapCurrent } = action.payload
+        debugger
+        return {
+          ...state,
+          tapCurrent
         }
       default:
         return state
