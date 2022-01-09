@@ -8,6 +8,7 @@ import {
 } from "../../actions/search";
 import SearchCom from "../../components/SearchCom";
 import ImageCom from "../../components/ImageCom";
+import TapCom from "../../components/TapCom";
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
   const { search } = state
@@ -62,6 +63,7 @@ export default class Index extends Component {
         <View className='searchList'>
           { imgListView }
         </View>
+        <TapCom ></TapCom>
       </View>
     )
   }

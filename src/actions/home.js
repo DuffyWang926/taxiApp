@@ -10,6 +10,13 @@
       })
     }
   }
+
+  export const changeHomeData = (payload) => {
+    return {
+      type: 'CHANGEHOMEDATA',
+      payload
+    }
+  }
   
 //   export const getPlayListDetail = (payload) => {
 //     const { id } = payload
