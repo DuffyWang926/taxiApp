@@ -10,12 +10,11 @@ const zuiXinImgB = require("../../assets/product/5.jpg")
 const zuiXinImgC = require("../../assets/product/6.jpg")
 
 const ImageCom = ({props}) => {
-  const { id, imgUrl  } = props
-  debugger
+  const { imgId, imgUrl  } = props
 
   const onImgClick = () =>{
     Taro.navigateTo({
-      url:`/pages/product/index?id=${id}`
+      url:`/pages/product/index?id=${imgId}`
     });
   }
   let urlEnd = ''

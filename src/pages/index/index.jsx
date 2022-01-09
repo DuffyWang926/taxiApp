@@ -45,9 +45,8 @@ export default class Index extends Component {
 
   render () {
     const { itemList } = this.props
-    debugger
     const itemListView = itemList.length > 0 && itemList.map( (v,i) =>{
-      v.url = '/pages/productList/index'
+      v.url = '/pages/productList/index?type='+v.type
       let res = (
         <HomeItem key={v.type} props={v}></HomeItem>
       )

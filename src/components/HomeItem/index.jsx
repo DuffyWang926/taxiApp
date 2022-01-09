@@ -26,7 +26,6 @@ const HomeItem = ({props}) => {
     )
     return res
   })
-  debugger
 
   return (
     <View className="homeItem" >
