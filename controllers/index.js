@@ -40,7 +40,7 @@ const fn_home = async (ctx, next) => {
     let imgListEnd = imgList.slice(0,3)
     let nextList = _.cloneDeep(imgList)
     nextList.sort((a,b) =>{
-        return a.updatedAt - b.updatedAt
+        return b.updatedAt - a.updatedAt
     })
     let newList = nextList.slice(0,3)
     console.log(imgList)
