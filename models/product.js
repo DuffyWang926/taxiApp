@@ -19,7 +19,7 @@ module.exports = db.defineModel('products', {
 //     type varchar(20),
 //     author varchar(10),
 //     title varchar(20),
-//     sum:db.STRING(30),
+//     sum varchar(20),
 //     description varchar(100),
 //     createdAt bigint,
 //     updatedAt bigint,

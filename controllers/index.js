@@ -25,7 +25,7 @@ const fn_home = async (ctx, next) => {
     console.log(`find ${products} products:`);
     let imgList = Array.isArray(products) && products.map( (v,i) =>{
         let res = {
-            imgId:v.id,
+            imgId:v.productId,
             imgUrl:v.imgUrl,
             title:v.title,
             author:v.author,

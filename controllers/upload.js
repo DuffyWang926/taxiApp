@@ -5,6 +5,7 @@ var fn_upload = async (ctx, next) => {
     const { type, name, theme} = body
     let fileBuffer = ctx.file.buffer
     let now = new Date().getTime() + ''
+    
     let code = 200
     let writePath = '../products/' + now + '.gif'
     let filePath = 'http://192.168.0.104:3000/product/' + now
@@ -21,8 +22,9 @@ var fn_upload = async (ctx, next) => {
     console.log('end')
 
     let productModel = model.product
-    let sum = parseInt(+now/10) + ''
-    
+    let sum = Math.floor(Math.random()*10+1) + ''
+    console.log(now,'now')
+    console.log(typeof now,'now')
     await  productModel.create({
         productId:now,
         imgUrl: filePath,
