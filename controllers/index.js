@@ -72,7 +72,7 @@ var fn_signin = async (ctx, next) => {
         ctx.response.body = `<h1>Welcome, ${name}!</h1>`;
     } else {
         ctx.response.body = `<h1>Login failed!</h1>
-        <p><a href="/">Try again</a></p>`;
+        <p><a href="/">Try agaisn</a></p>`;
     }
 };
 
