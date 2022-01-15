@@ -79,8 +79,8 @@ var fn_signin = async (ctx, next) => {
 
 
 module.exports = {
-    'GET /home': fn_home,
-    'GET /banner': fn_banner,
-    'POST /signin': fn_signin,
+    'GET /api/home': fn_home,
+    'GET /api/banner': fn_banner,
+    'POST /api/signin': fn_signin,
     // 'GET /product': fn_home
 };

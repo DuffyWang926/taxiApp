@@ -12,5 +12,5 @@ const homeData = async (ctx, next) => {
 };
 
 module.exports = {
-    'POST /home': homeData,
+    'POST /api/home': homeData,
 };
