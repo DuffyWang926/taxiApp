@@ -45,6 +45,6 @@ const fn_search = async (ctx, next) => {
 
 
 module.exports = {
-    'POST /search': fn_search,
+    'POST /api/search': fn_search,
     
 };

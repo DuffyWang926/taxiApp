@@ -32,5 +32,5 @@ const fn_productId = async (ctx, next) => {
 };
 
 module.exports = {
-    'POST /productId': fn_productId
+    'POST /api/productId': fn_productId
 };

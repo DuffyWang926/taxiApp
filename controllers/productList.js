@@ -45,5 +45,5 @@ const fn_productList = async (ctx, next) => {
 };
 
 module.exports = {
-    'POST /productlist': fn_productList
+    'POST /api/productlist': fn_productList
 };

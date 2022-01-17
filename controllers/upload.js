@@ -52,5 +52,5 @@ var fn_upload = async (ctx, next) => {
 };
 
 module.exports = {
-    'POST /upload': fn_upload
+    'POST /api/upload': fn_upload
 };
