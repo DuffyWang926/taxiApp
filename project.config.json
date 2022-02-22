@@ -2,7 +2,7 @@
   "miniprogramRoot": "dist/",
   "projectname": "myApp",
   "description": "",
-  "appid": "wxdd0d971774ae9212",
+  "appid": "ks691584021661029938",
   "setting": {
     "urlCheck": false,
     "es6": false,
@@ -22,9 +22,9 @@
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
+    "useMultiFrameRuntime": false,
+    "useApiHook": false,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
