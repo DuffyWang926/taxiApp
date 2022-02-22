@@ -1,0 +1,40 @@
+.login{
+    width: 100%;
+    height: 100%;
+    margin: 20px;
+    .loginTop{
+        text-align: center;
+        color:#333;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .loginMid{
+        padding:100px 20px;
+        text-align: center;
+        .midImg{
+            width: 100px;
+            height: 100px;
+        }
+        .midTitle{
+            font-size: 18px;
+        }
+        .midTip{
+            padding: 10px 0 0 0;
+            font-size: 16px;
+            color:#aaa;
+        }
+    }
+    .loginBtn{
+        width: 80%;
+        height: 50px;
+        margin: auto;
+        text-align: center;
+        color: #d71700;
+        width: 80%;
+        border-radius: 25px;
+        background: linear-gradient(180deg,#ffee8e,#ffac3d);
+        font-size: 14px;
+    }
+    
+}
+

@@ -27,7 +27,7 @@ export default class TapCom extends Component{
 
   onTapClick = (val) =>{
     const { url, type } = val
-    Taro.navigateTo({
+    Taro.redirectTo({
       url
     });
     this.props.changeHomeData({ tapCurrent:type})
@@ -40,13 +40,14 @@ export default class TapCom extends Component{
       {
         url:`/pages/index/index`,
         type:0,
-        title:'主页'
+        title:'首页'
       },
       {
         url:`/pages/search/index`,
-        type:1,
-        title:'搜索'
+        type:2,
+        title:'我的'
       },
+      
 
     ]
 
