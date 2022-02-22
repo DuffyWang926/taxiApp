@@ -11,7 +11,7 @@ import {
   postProductList,
 } from "../../actions/productList";
 import { history } from '@tarojs/router'
-const bannerImg = require("../../assets/banner/banner3.png")
+const logoImg = require("../../assets/logo/logo.jpg")
 const mapStateToProps = (state)=>{
   const { product, productList } = state
   const { productListData } = productList
@@ -46,7 +46,7 @@ export default class Index extends Component {
           登录
         </View>
         <View className='loginMid'>
-          <Image className='midImg'></Image>
+          <Image className='midImg' src={logoImg} ></Image>
           <View className='midTitle'>
             打车券每天领
           </View>
