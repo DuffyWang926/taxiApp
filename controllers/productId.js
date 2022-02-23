@@ -6,13 +6,13 @@ const fn_productId = async (ctx, next) => {
 
     let product = await  productModel.findAll({
         where: {
-            id
+            productId:id
         }
     })
     console.log(`find ${product} product:`);
     let imgList = Array.isArray(product) && product.map( (v,i) =>{
         let res = {
-            imgId:v.id,
+            imgId:v.productId,
             imgUrl:v.imgUrl,
             title:v.title,
             author:v.author,
