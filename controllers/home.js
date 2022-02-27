@@ -62,7 +62,7 @@ const fn_home = async (ctx, next) => {
 };
 
 module.exports = {
-    'GET /api/home': fn_home,
-    'GET /api/banner': fn_banner,
+    'GET /taxiapi/home': fn_home,
+    'GET /taxiapi/banner': fn_banner,
 
 };

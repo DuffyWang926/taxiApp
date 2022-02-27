@@ -43,5 +43,5 @@ var fn_login = async (ctx, next) => {
 
 
 module.exports = {
-    'POST /api/login': fn_login,
+    'POST /taxiapi/login': fn_login,
 };
