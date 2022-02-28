@@ -7,8 +7,8 @@ async function testPOST() {
 }
 var fn_login = async (ctx, next) => {
     let body = ctx.request.body
-    // const { code } = body
-    let code = '071WPMHa1IXmHC0rz4Ja18AILq4WPMHl'
+    const { code } = body
+    // let code = '071WPMHa1IXmHC0rz4Ja18AILq4WPMHl'
     let secret = '1d3b61572a9edbb288b25472f4e1fb60'
     let url = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxe52a97ff5cbcfc9a&secret=${secret}&code=${code}&grant_type=authorization_code`
     console.log('code',url)
