@@ -1,6 +1,6 @@
 const config = {
     dialect: 'mysql',
-    database: 'test', 
+    database: 'taxi', 
     username: 'wefRoot', 
     password: 'wefRoot', 
     host: 'localhost', 

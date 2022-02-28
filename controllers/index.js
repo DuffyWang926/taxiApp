@@ -1,6 +1,5 @@
-const https = require('https');
 const axios = require('axios');
-
+const model = require('../model');
 
 
 async function testPOST() {
@@ -9,7 +8,7 @@ async function testPOST() {
 var fn_login = async (ctx, next) => {
     let body = ctx.request.body
     // const { code } = body
-    let code = '041bm9ll2b5LI84l1Yol2zNn1a2bm9l3'
+    let code = '071WPMHa1IXmHC0rz4Ja18AILq4WPMHl'
     let secret = '1d3b61572a9edbb288b25472f4e1fb60'
     let url = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxe52a97ff5cbcfc9a&secret=${secret}&code=${code}&grant_type=authorization_code`
     console.log('code',url)
@@ -35,10 +34,41 @@ var fn_login = async (ctx, next) => {
     })
     const userInfoData = userInfoRes.data || {}
     const {  nickname, sex, province, city, headimgurl, unionid } = userInfoData
-    console.log(nickname)
+    let userModel = model.user
+    let now = new Date().getTime() + ''
+    let users = await  userModel.findAll({
+        where: {
+            openid
+        }
+    })
+    console.log(users)
+    if(users.length <= 0){
+        let nextUser = {
+            nickname,
+            sex,
+            province,
+            city,
+            headimgurl,
+            openid,
+            unionid,
+            createdAt: now,
+            updatedAt: now,
+            version:1.0
+        }
+        await  userModel.create(nextUser)
+    }
     ctx.response.body = {
                         code:200,
                         data:{
+                            userInfo:{
+                                nickname,
+                                sex,
+                                province,
+                                city,
+                                headimgurl,
+                                openid,
+                                unionid
+                            }
                             
                         }
                     }
@@ -49,6 +79,6 @@ var fn_login = async (ctx, next) => {
 
 
 module.exports = {
-    'POST /taxiapi/login': fn_login,
-    // 'GET /taxiapi/login': fn_login,
+    // 'POST /taxiapi/login': fn_login,
+    'GET /taxiapi/login': fn_login,
 };

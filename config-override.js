@@ -1,5 +1,5 @@
 var config = {
-    database: 'production',
+    database: 'taxi',
     username: 'wefRoot',
     password: 'wefRoot',
     host: '192.168.1.199'
