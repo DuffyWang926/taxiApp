@@ -1,4 +1,4 @@
 export default {
-  navigationBarTitleText: '爆萌表情包',
+  navigationBarTitleText: '打车券梦想号',
 
 }

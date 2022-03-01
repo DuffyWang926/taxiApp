@@ -4,8 +4,8 @@ import { logError } from '../utils/error'
 
 // import {baseUrl} from '../../config'
 
-const baseUrl= 'https://www.mengshikejiwang.top/api'
-// const baseUrl= 'http://127.0.0.1:3000/api'
+const baseUrl= 'https://www.mengshikejiwang.top/taxiapi'
+// const baseUrl= 'http://127.0.0.1:3001/taxiapi'
 
 
 export default {
@@ -60,13 +60,20 @@ export default {
           })
           return logError('api', '请先登录')
         } else if (res.statusCode === HTTP_STATUS.SUCCESS) {
-          return res.data
+          let result = res.data
+          return result
         }
       },
       error(e) {
         logError('api', '请求接口出现问题', e)
       }
     }
+    
+    // let next = new Promise( (res,rej) =>{
+    //   Taro.request(option).then((result) =>{
+    //     res(result.data)
+    //   })
+    // })
     return Taro.request(option)
   },
   get(url, data) {

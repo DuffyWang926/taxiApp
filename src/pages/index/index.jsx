@@ -5,7 +5,6 @@ import { View, TabBar, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './index.scss'
 import { connect } from "../../utils/connect";
 import {
-  getHomeDetail,
   changeHomeData
 
 } from "../../actions/home";
@@ -32,9 +31,6 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    getHomeDetail:(payload)=>{
-      dispatch(getHomeDetail(payload));
-    },
     changeHomeData:(payload)=>{
       dispatch(changeHomeData(payload));
     }
@@ -72,9 +68,7 @@ export default class Index extends Component {
   }
 
   
-  onLoad(){
-    this.props.getHomeDetail()
-  }
+ 
   changeTab= ()=>{
     this.props.changeHomeData({ tapCurrent:1})
   }
@@ -108,14 +102,7 @@ export default class Index extends Component {
 
   render () {
     const { bannerList } = this.state
-    const { itemList } = this.props
-    const itemListView = itemList.length > 0 && itemList.map( (v,i) =>{
-      v.url = '/pages/productList/index?type='+v.type
-      let res = (
-        <HomeItem key={v.type} props={v}></HomeItem>
-      )
-      return res
-    })
+    
     const searchProps ={
       url:'/pages/search/index',
       changeTab:this.changeTab
@@ -169,9 +156,9 @@ export default class Index extends Component {
           autoplay>
           {bannerListCom}
         </Swiper>
-        <View className='homeSearch'>
+        {/* <View className='homeSearch'>
           <SearchCom props={searchProps}></SearchCom>
-        </View>
+        </View> */}
         <View className='typeList'>
           {typeListCom}
         </View>
