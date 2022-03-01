@@ -79,6 +79,6 @@ var fn_login = async (ctx, next) => {
 
 
 module.exports = {
-    // 'POST /taxiapi/login': fn_login,
-    'GET /taxiapi/login': fn_login,
+    'POST /taxiapi/login': fn_login,
+    // 'GET /taxiapi/login': fn_login,
 };
