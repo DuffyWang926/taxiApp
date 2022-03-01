@@ -26,14 +26,14 @@ var fn_login = async (ctx, next) => {
         url: refreshUrl,
     })
     const refreshData = refreshRes.data || {}
-    const { access_token,  openid } = refreshData
+    const { access_token,  openid = '' } = refreshData
     let userInfoUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`
     let userInfoRes = await axios({
         method: "GET",
         url: userInfoUrl,
     })
     const userInfoData = userInfoRes.data || {}
-    const {  nickname, sex, province, city, headimgurl, unionid } = userInfoData
+    const {  nickname= '', sex= -1, province = '', city = '', headimgurl = '', unionid = '' } = userInfoData
     let userModel = model.user
     let now = new Date().getTime() + ''
     let users = await  userModel.findAll({
@@ -79,6 +79,6 @@ var fn_login = async (ctx, next) => {
 
 
 module.exports = {
-    'POST /taxiapi/login': fn_login,
-    // 'GET /taxiapi/login': fn_login,
+    // 'POST /taxiapi/login': fn_login,
+    'GET /taxiapi/login': fn_login,
 };
