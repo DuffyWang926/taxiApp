@@ -4,49 +4,94 @@ import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
-import {
-  postProduct,
-} from "../../actions/product";
-import {
-  postProductList,
-} from "../../actions/productList";
+
 import { history } from '@tarojs/router'
+import TapCom from "../../components/TapCom";
+import {
+  postLogin
+
+} from "../../actions/home";
 const moneyImg = require("../../assets/icon/money.png")
 const mapStateToProps = (state)=>{
-  const { product, productList } = state
-  const { productListData } = productList
-  const { productData } = product
+  const { home } = state
+  const { userInfo = {} } = home
+  const { nickname, headimgurl, openid } = userInfo
+  
     return {
-      productData,
-      productListData
+      nickname,
+      headimgurl,
+      openid
     }
 
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    postProduct:(payload)=>{
-      dispatch(postProduct(payload));
-    },
-    postProductList:(payload)=>{
-      dispatch(postProductList(payload));
+    postLogin:(payload)=>{
+      dispatch(postLogin(payload));
     }
+    
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
 
+  componentDidMount(){
+    let url = window.location.href
+    let nextList = url.split('?')
+    let nextUrl = nextList.length > 0 && nextList[1]
+    let paramsList = nextUrl && nextUrl.split('&')
+    let code = ''
+    Array.isArray(paramsList) && paramsList.map( (v,i) =>{
+      let endList = v && v.split('=')
+      if(endList.length > 0){
+        if(endList[0] == 'code'){
+          code = endList[1]
+        }
+      }
+      
+    })
+    if(code){
+      this.props.postLogin({code})
+    }
+  }
+
+  loginClick = () =>{
+    const { path } = getCurrentInstance()?.router || {};
+    let url = 'pages/login/index?oldUrl=' + path
+    Taro.navigateTo({
+      url
+    })
+  }
+
+  withdraw = () =>{
+    let url = 'pages/withdraw/index'
+    if(5 >= 5){
+      Taro.navigateTo({
+        url
+      })
+    }else{
+      Taro.showToast({
+        title:'提示',
+        content:'余额超过5元才可提现'
+      })
+    }
+  }
+
   
 
   render () {
+    const { nickname, headimgurl } = this.props
     return (
       <View className='mine'>
         <View className='mineTop'>
           我的
         </View>
         <View className='mineInfoBox'>
-          <Image className='mineImg'></Image>
+          <Image className='mineImg' src={headimgurl}></Image>
           <View className='mineInfo'>
-            <View>点击登录</View>
+            { nickname ? <View onClick={() =>{ this.loginClick()}}>{nickname}</View>
+            : <View onClick={() =>{ this.loginClick()}}>点击登录</View>
+            }
             <View>ID:</View>
             <View>推荐人:</View>
           </View>
@@ -97,11 +142,12 @@ export default class Index extends Component {
               </View>
             </View>
           </View>
-          <View className='withdraw'>
+          <View className='withdraw' onClick={ () =>{this.withdraw()}}>
             提现
           </View>
 
         </View>
+        <TapCom ></TapCom>
        
       </View>
     )

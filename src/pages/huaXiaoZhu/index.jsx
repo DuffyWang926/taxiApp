@@ -4,37 +4,41 @@ import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
-import {
-  postProduct,
-} from "../../actions/product";
-import {
-  postProductList,
-} from "../../actions/productList";
+
 import { history } from '@tarojs/router'
 const bannerImg = require("../../assets/banner/banner4.jpg")
 const mapStateToProps = (state)=>{
-  const { product, productList } = state
-  const { productListData } = productList
-  const { productData } = product
-    return {
-      productData,
-      productListData
-    }
-
+  const { home } = state
+  const { userId } = home
+  return {
+    userId
+  }
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    postProduct:(payload)=>{
-      dispatch(postProduct(payload));
-    },
-    postProductList:(payload)=>{
-      dispatch(postProductList(payload));
-    }
+    
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
 
+  componentDidMount(){
+    
+  }
+
+  onRedClick = () =>{
+    const { userId } = this.props
+    const { path } = getCurrentInstance()?.router || {};
+    if(!userId){
+      let url = 'pages/login/index?oldUrl=' + path
+      Taro.navigateTo({
+        url
+      })
+    }else{
+      let url = "https://activity01.yunzhanxinxi.com/link/442716629117e2144d5eaec13352fb14"
+      window.location.href = url
+    }
+  }
   
 
   render () {
@@ -46,8 +50,9 @@ export default class Index extends Component {
         </View>
         <Image className='eLeMeMid' src={bannerImg}></Image>
 
-        <View className='eLeMeBtn' >
-          <a href="https://activity01.yunzhanxinxi.com/link/442716629117e2144d5eaec13352fb14" className='redText'>领红包打车</a>
+        <View className='eLeMeBtn' onClick={() => this.onRedClick()}>
+          领红包打车
+          {/* <a href="https://activity01.yunzhanxinxi.com/link/442716629117e2144d5eaec13352fb14" className='redText'>领红包打车</a> */}
         </View>
       </View>
     )

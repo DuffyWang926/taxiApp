@@ -4,6 +4,7 @@ import './app.scss'
 // import 'taro-ui/dist/style/index.scss'
 
 import configStore from "./store";
+debugger
 
 const store = configStore();
 
@@ -21,6 +22,7 @@ const store = configStore();
 //     return this.props.children
 //   }
 // }
+debugger
 
 const App = ({ children }) =>{
   return (
@@ -30,5 +32,6 @@ const App = ({ children }) =>{
   );
   
 }
+debugger
 
 export default App

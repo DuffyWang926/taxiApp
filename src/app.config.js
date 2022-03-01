@@ -7,9 +7,7 @@ export default {
     'pages/huaXiaoZhu/index',
     'pages/login/index',
     'pages/mine/index',
-    'pages/upload/index',
-    'pages/product/index',
-    'pages/productList/index',
+    'pages/withdraw/index',
     'pages/search/index'
   ],
   window: {
