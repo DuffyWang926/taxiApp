@@ -1,10 +1,6 @@
 const axios = require('axios');
 const model = require('../model');
 
-
-async function testPOST() {
-    
-}
 var fn_login = async (ctx, next) => {
     let body = ctx.request.body
     const { code } = body

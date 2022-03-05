@@ -1,68 +1,48 @@
 const model = require('../model');
-const _ = require('lodash')
 
-const fn_banner = async (ctx, next) => {
-    let productModel = model.user
-
-    let users = await  productModel.findAll({
-        where: {
-        }
-    })
-    console.log(`find ${users} users:`);
+var fn_postUserInfo = async (ctx, next) => {
+    let body = ctx.request.body
+    const { userId } = body
+    let userModel = model.user
     
-    ctx.response.body = {
-        bannerList:users
-    }
-};
-
-const fn_home = async (ctx, next) => {
-    let productModel = model.product
-
-    let products = await  productModel.findAll({
+    let users = await  userModel.findAll({
         where: {
+            unionid:userId
         }
     })
-    console.log(`find ${products} products:`);
-    let imgList = Array.isArray(products) && products.map( (v,i) =>{
-        let res = {
-            imgId:v.productId,
-            imgUrl:v.imgUrl,
-            title:v.title,
-            author:v.author,
-            downSum:v.sum,
-            updatedAt:v.updatedAt
+    let userInfo = {
+        nickname:'',
+        sex:'',
+        province:'',
+        city:'',
+        headimgurl:'',
+        openid:'',
+        unionid:'test'
+    }
+    if(users.length > 0 ){
+        const {  nickname= '', sex= -1, province = '', city = '', headimgurl = '', unionid = 'test' } = users[0]
+        userInfo = {
+            nickname,
+            sex,
+            province,
+            city,
+            headimgurl,
+            openid,
+            unionid
         }
-        return res
-    })
-    imgList.sort((a,b) =>{
-        return a.downSum - b.downSum
-    })
-    let imgListEnd = imgList.slice(0,3)
-    let nextList = _.cloneDeep(imgList)
-    nextList.sort((a,b) =>{
-        return b.updatedAt - a.updatedAt
-    })
-    let newList = nextList.slice(0,3)
-    console.log(imgList)
-    console.log(nextList)
-    let dataRes = [
-        {
-            title:'热门',
-            type:0,
-            imgList:imgListEnd
-        },
-        {
-            title:'最新',
-            type:1,
-            imgList:newList
-        },
-    ]
-    ctx.response.body = dataRes
+    }
+    console.log('userInfo',JSON.stringify(userInfo))
+    ctx.response.body = {
+                        code:200,
+                        data:{
+                            userInfo
+                        }
+                    }
+    
     
 };
 
 module.exports = {
-    'GET /taxiapi/home': fn_home,
-    'GET /taxiapi/banner': fn_banner,
+    'POST /taxiapi/postUserInfo': fn_postUserInfo,
 
 };
