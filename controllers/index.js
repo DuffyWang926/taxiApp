@@ -33,7 +33,7 @@ var fn_login = async (ctx, next) => {
         url: userInfoUrl,
     })
     const userInfoData = userInfoRes.data || {}
-    const {  nickname= '', sex= -1, province = '', city = '', headimgurl = '', unionid = '' } = userInfoData
+    const {  nickname= '', sex= -1, province = '', city = '', headimgurl = '', unionid = 'test' } = userInfoData
     let userModel = model.user
     let now = new Date().getTime() + ''
     let users = await  userModel.findAll({
@@ -41,8 +41,9 @@ var fn_login = async (ctx, next) => {
             openid
         }
     })
-    console.log(users)
-    if(users.length <= 0){
+    if(users.length <= 0 && openid){
+        
+
         let nextUser = {
             nickname,
             sex,
@@ -57,19 +58,21 @@ var fn_login = async (ctx, next) => {
         }
         await  userModel.create(nextUser)
     }
+    console.log('userInfoData',JSON.stringify(userInfoData))
+    let userInfo = {
+        nickname,
+        sex,
+        province,
+        city,
+        headimgurl,
+        openid,
+        unionid
+    }
+    console.log('userInfoData',JSON.stringify(userInfoData))
     ctx.response.body = {
                         code:200,
                         data:{
-                            userInfo:{
-                                nickname,
-                                sex,
-                                province,
-                                city,
-                                headimgurl,
-                                openid,
-                                unionid
-                            }
-                            
+                            userInfo
                         }
                     }
     
@@ -80,5 +83,5 @@ var fn_login = async (ctx, next) => {
 
 module.exports = {
     'POST /taxiapi/login': fn_login,
-    // 'GET /taxiapi/login': fn_login,
+    'GET /taxiapi/login': fn_login,
 };
