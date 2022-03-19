@@ -2,6 +2,8 @@ const db = require('../db');
 
 module.exports = db.defineModel('users', {
     id: db.STRING(10),
+    userId:db.STRING(10),
+    userCode:db.STRING(10),
     nickname:db.STRING(50),
     sex: db.BIGINT(10),
     province: db.STRING(40),
@@ -16,6 +18,8 @@ module.exports = db.defineModel('users', {
 
 // create table users (
 //     id varchar(50) not null,
+//     userId varchar(10),
+//     userCode varchar(10),
 //     nickname varchar(10),
 //     sex bigint,
 //     province varchar(10),
