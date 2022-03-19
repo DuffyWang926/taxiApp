@@ -74,6 +74,13 @@ export default class Index extends Component {
     }
   }
 
+  onShare = () =>{
+    let url = 'pages/share/index'
+    Taro.navigateTo({
+      url
+    })
+  }
+
   
 
   render () {
@@ -84,14 +91,23 @@ export default class Index extends Component {
           我的
         </View>
         <View className='mineInfoBox'>
-          <Image className='mineImg' src={headimgurl}></Image>
-          <View className='mineInfo'>
-            { nickname ? <View onClick={() =>{ this.loginClick()}}>{nickname}</View>
-            : <View onClick={() =>{ this.loginClick()}}>点击登录</View>
-            }
-            <View>ID:{userId}</View>
-            <View>推荐人:{userCode}</View>
+          <View className='mineInfoLeft'>
+            <Image className='mineImg' src={headimgurl}></Image>
+            <View className='mineInfo'>
+              { nickname ? <View onClick={() =>{ this.loginClick()}}>{nickname}</View>
+              : <View onClick={() =>{ this.loginClick()}}>点击登录</View>
+              }
+              <View>ID:{userId}</View>
+              <View>推荐人:{userCode}</View>
+            </View>
           </View>
+          <View className='mineInfoRight' onClick={this.onShare}>
+            {/* <Image className='mineShareImg'></Image> */}
+            <View>分享</View>
+          </View>
+
+          
+          
         </View>
         <View className='mineMoney'>
           <View className='moneyType'>
