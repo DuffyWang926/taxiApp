@@ -1,15 +1,12 @@
 import { Component } from 'react'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 
-import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
-// import { AtIcon, AtButton, AtToast } from "taro-ui";
+import { View, Input, Image } from '@tarojs/components'
 import './index.scss'
 import { connect } from "../../utils/connect";
 import {
   postLogin
-
 } from "../../actions/home";
-import { history } from '@tarojs/router'
 const logoImg = require("../../assets/logo/logo.jpg")
 const mapStateToProps = (state)=>{
   
@@ -36,8 +33,12 @@ export default class Index extends Component {
     }
   }
 
-  componentDidMount(){
-    
+  
+
+  onInputChange = (e) =>{
+    let val = e.target.value
+    sessionStorage.setItem('upCode',val)
+
   }
 
   
@@ -64,6 +65,13 @@ export default class Index extends Component {
           </View>
           <View className='midTip'>
             省一点,赚一点,越赚越快乐
+          </View>
+        </View>
+        <View className='recommend' >
+          <span>推荐码:</span>
+          <View >
+            <Input onInput={this.onInputChange} className="recommendInput"></Input>
+            <span className='recommendTip'>填写推荐码(推荐人的ID)会有更多佣金</span>
           </View>
         </View>
         <View className='loginBtn' >

@@ -46,8 +46,9 @@ export default class Index extends Component {
     this.props.changeHomeData({ tapCurrent:2})
     let url = window.location.href
     let code = getUrlCode(url)
+    let upCode = sessionStorage.getItem('upCode')
     if(code){
-      this.props.postLogin({code})
+      this.props.postLogin({ code, upCode})
     }
   }
 
@@ -76,7 +77,7 @@ export default class Index extends Component {
   
 
   render () {
-    const { nickname, headimgurl, userId } = this.props
+    const { nickname, headimgurl, userId, userCode } = this.props
     return (
       <View className='mine'>
         <View className='mineTop'>
@@ -89,7 +90,7 @@ export default class Index extends Component {
             : <View onClick={() =>{ this.loginClick()}}>点击登录</View>
             }
             <View>ID:{userId}</View>
-            <View>推荐人:</View>
+            <View>推荐人:{userCode}</View>
           </View>
         </View>
         <View className='mineMoney'>
