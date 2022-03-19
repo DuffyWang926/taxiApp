@@ -23,12 +23,12 @@
     }else if( action.type ==  "POSTUSERINFO" ){
       const { data = {} } = action.payload
       const { userInfo = {} } = data
-      const { unionid = '' } = userInfo
+      const { userId = '' } = userInfo
       sessionStorage.setItem("userId", unionid);
       return {
         ...state,
         userInfo,
-        userId:unionid
+        userId,
       };
 
     }else if( action.type ==  "CHANGEHOMEDATA" ){

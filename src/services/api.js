@@ -16,7 +16,6 @@ export default {
     
     const setCookie = (res) => {
       if (res.cookies && res.cookies.length > 0 && url.indexOf('login/cellphone') !== -1) {
-        // console.info("res ===>", res)
         let cookies = '';
         res.cookies.forEach((cookie, index) => {
           // windows的微信开发者工具返回的是cookie格式是有name和value的,在mac上是只是字符串的
@@ -26,7 +25,6 @@ export default {
             cookies += `${cookie}`
           }
         });
-        // console.info("cookies ===>", cookies)
         Taro.setStorageSync('cookies', cookies)
       }
       

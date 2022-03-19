@@ -3,22 +3,22 @@
   export const postLogin = (payload) => {
     return async dispatch => {
       var userId = sessionStorage.getItem("userId");
-      // if(userId){
-      //   let res = await api.post('/postUserInfo',{
-      //     userId
-      //   })
-      //   dispatch({
-      //     type: 'POSTUSERINFO',
-      //     payload: res
-      //   })
+      if(userId){
+        let res = await api.post('/postUserInfo',{
+          userId
+        })
+        dispatch({
+          type: 'POSTUSERINFO',
+          payload: res
+        })
 
-      // }else{
-      //   let res = await api.post('/login',payload)
-      //   dispatch({
-      //     type: 'LOGIN',
-      //     payload: res
-      //   })
-      // }
+      }else{
+        let res = await api.post('/login',payload)
+        dispatch({
+          type: 'LOGIN',
+          payload: res
+        })
+      }
     }
   }
 

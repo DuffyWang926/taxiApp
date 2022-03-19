@@ -1,6 +1,7 @@
 export default {
   pages: [
     'pages/index/index',
+    'pages/share/index',
     'pages/eLeMe/index',
     'pages/meiTuan/index',
     'pages/diDi/index',
