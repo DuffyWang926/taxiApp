@@ -127,40 +127,8 @@ var fn_login = async (ctx, next) => {
     
 };
 
-// const fn_basicLogin = async (ctx, next) => {
-//     let body = ctx.request.body
-//     let { code, upCode } = body
-//     code = '0312will2ybAQ84sUTnl2ULBlj02wilP'
-//     let secret = '1d3b61572a9edbb288b25472f4e1fb60'
-//     https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx520c15f417810387&redirect_uri=https%3A%2F%2Fchong.qq.com%2Fphp%2Findex.php%3Fd%3D%26c%3DwxAdapter%26m%3DmobileDeal%26showwxpaytitle%3D1%26vb2ctag%3D4_2030_5_1194_60&response_type=code&scope=snsapi_base&state=123#wechat_redirect
-//     let url = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxe52a97ff5cbcfc9a&secret=${secret}&code=${code}&grant_type=authorization_code`
-//     let response = await axios({
-//         method: "GET",
-//         url: url,
-//     })
-//     const { data={} } = response
-//     const {  refresh_token, errcode } = data
-//     console.log('DATA', data)
-//     let userInfo =  { 
-//                         nickname: '',
-//                         sex:-1,
-//                         province:'',
-//                         city:'',
-//                         headimgurl:'',
-//                         openid:'',
-//                         unionid:'test'
-//                     }
-//     ctx.response.body = {
-//         code:200,
-//         data:{
-//             userInfo
-//         }
-//     }
 
-
-// }
 module.exports = {
     'POST /taxiapi/login': fn_login,
     'GET /taxiapi/login': fn_login,
-    // 'GET /taxiapi/basiclogin': fn_basicLogin,
 };
