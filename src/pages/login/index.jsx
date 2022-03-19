@@ -7,6 +7,8 @@ import { connect } from "../../utils/connect";
 import {
   postLogin
 } from "../../actions/home";
+import getUrlCode from "../../utils/getUrlCode";
+
 const logoImg = require("../../assets/logo/logo.jpg")
 const mapStateToProps = (state)=>{
   
@@ -29,8 +31,31 @@ export default class Index extends Component {
     super()
     const { oldUrl } = getCurrentInstance()?.router?.params || {};
     this.state={
-      oldUrl
+      oldUrl,
+      upCode:''
     }
+  }
+
+  componentDidMount(){
+    let url = window.location.href
+    let nextList = url.split('?')
+    let nextUrl = nextList.length > 0 && nextList[1]
+    let paramsList = nextUrl && nextUrl.split('&')
+    let upCode = ''
+    Array.isArray(paramsList) && paramsList.map( (v,i) =>{
+      let endList = v && v.split('=')
+      if(endList.length > 0){
+        if(endList[0] == 'upCode'){
+          upCode = endList[1]
+        }
+      }
+      
+    })
+    this.setState({
+      upCode
+    })
+    sessionStorage.setItem('upCode',upCode)
+    
   }
 
   
@@ -44,7 +69,7 @@ export default class Index extends Component {
   
 
   render () {
-    const { oldUrl = 'pages/index/index' } = this.state
+    const { oldUrl = 'pages/index/index', upCode } = this.state
     let redirectUrl = 'https://www.mengshikejiwang.top/#' + oldUrl
     console.log('redirectUrl', redirectUrl)
     let REDIRECT_URI = encodeURIComponent(redirectUrl)
@@ -70,7 +95,7 @@ export default class Index extends Component {
         <View className='recommend' >
           <span>推荐码:</span>
           <View >
-            <Input onInput={this.onInputChange} className="recommendInput"></Input>
+            <Input onInput={this.onInputChange} value={upCode} className="recommendInput"></Input>
             <span className='recommendTip'>填写推荐码(推荐人的ID)会有更多佣金</span>
           </View>
         </View>

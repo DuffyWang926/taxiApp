@@ -11,20 +11,33 @@
     }
     .mineInfoBox{
         padding:40px 20px;
-        box-sizing: border-box;
         display: flex;
-        .mineImg{
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-        }
-        .mineInfo{
-            padding:0 0 0 10px;
-            font-size: 18px;
+        justify-content: space-between;
+        .mineInfoLeft{
+            box-sizing: border-box;
             display: flex;
-            flex-direction: column;
-            justify-content: space-around;
+            .mineImg{
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+            }
+            .mineInfo{
+                padding:0 0 0 10px;
+                font-size: 18px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
         }
+        .mineInfoRight{
+            font-size: 16px;
+            .mineShareImg{
+                width:10px;
+                height: 10px;
+            }
+
+        }
+        
     }
     .mineMoney{
         box-sizing: border-box;

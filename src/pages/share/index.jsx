@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import Taro, { getCurrentInstance } from '@tarojs/taro'
 
-import { View, Input, Image } from '@tarojs/components'
+import { View, Image } from '@tarojs/components'
 import './index.scss'
 import { connect } from "../../utils/connect";
 import {
@@ -9,10 +9,13 @@ import {
 
 } from "../../actions/mine";
 const mapStateToProps = (state)=>{
-  const { mine } = state
+  const { mine, home } = state
+  const { userInfo } = home
+  const { userCode } = userInfo
   const { imgData } = mine
   return {
-    imgData
+    imgData,
+    userCode
   }
 
 }
@@ -31,8 +34,9 @@ export default class Index extends Component {
     
   }
   componentDidMount(){
-    debugger
-    this.props.getCodeImg()
+    const { userCode } = this.props
+    let url = 'https://www.mengshikejiwang.top/#/pages/login/index?upCode='  + userCode
+    this.props.getCodeImg({url})
   }
 
 
@@ -42,10 +46,10 @@ export default class Index extends Component {
     return (
       <View className='share'>
         <View className='shareTop'>
-         用微信扫二维码即可
+         请用微信扫二维码
         </View>
         <View className='shareCon'>
-          {imgData}
+          <Image src={imgData}></Image>
         </View>
       </View>
     )
