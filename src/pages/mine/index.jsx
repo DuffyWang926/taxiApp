@@ -4,7 +4,9 @@ import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
-
+import {
+  changeHomeData
+} from "../../actions/home";
 import { history } from '@tarojs/router'
 import TapCom from "../../components/TapCom";
 import {
@@ -12,15 +14,17 @@ import {
 
 } from "../../actions/home";
 const moneyImg = require("../../assets/icon/money.png")
+import getUrlCode from "../../utils/getUrlCode";
 const mapStateToProps = (state)=>{
   const { home } = state
-  const { userInfo = {} } = home
+  const { userInfo = {}, userId } = home
   const { nickname, headimgurl, openid } = userInfo
   
     return {
       nickname,
       headimgurl,
-      openid
+      openid,
+      userId
     }
 
 }
@@ -28,6 +32,9 @@ const mapDispatchToProps = (dispatch) =>{
   return {
     postLogin:(payload)=>{
       dispatch(postLogin(payload));
+    },
+    changeHomeData:(payload)=>{
+      dispatch(changeHomeData(payload));
     }
     
   }
@@ -36,20 +43,9 @@ const mapDispatchToProps = (dispatch) =>{
 export default class Index extends Component {
 
   componentDidMount(){
+    this.props.changeHomeData({ tapCurrent:2})
     let url = window.location.href
-    let nextList = url.split('?')
-    let nextUrl = nextList.length > 0 && nextList[1]
-    let paramsList = nextUrl && nextUrl.split('&')
-    let code = ''
-    Array.isArray(paramsList) && paramsList.map( (v,i) =>{
-      let endList = v && v.split('=')
-      if(endList.length > 0){
-        if(endList[0] == 'code'){
-          code = endList[1]
-        }
-      }
-      
-    })
+    let code = getUrlCode(url)
     if(code){
       this.props.postLogin({code})
     }
@@ -80,7 +76,7 @@ export default class Index extends Component {
   
 
   render () {
-    const { nickname, headimgurl } = this.props
+    const { nickname, headimgurl, userId } = this.props
     return (
       <View className='mine'>
         <View className='mineTop'>
@@ -92,7 +88,7 @@ export default class Index extends Component {
             { nickname ? <View onClick={() =>{ this.loginClick()}}>{nickname}</View>
             : <View onClick={() =>{ this.loginClick()}}>点击登录</View>
             }
-            <View>ID:</View>
+            <View>ID:{userId}</View>
             <View>推荐人:</View>
           </View>
         </View>

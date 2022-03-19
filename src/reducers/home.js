@@ -2,30 +2,43 @@
 
   
   const INITIAL_STATE = {
-    userId:'a',
+    userId:'',
     userInfo:{},
     tapCurrent:0
   }
   
   export default function home (state = INITIAL_STATE, action) {
-    switch (action.type) {
-      case "LOGIN":
-        const { data = {} } = action.payload
-        const { userInfo = {} } = data
-        const { unionid = 'a' } = userInfo
-        return {
-          ...state,
-          userInfo,
-          userId:unionid
-        }
-      case "CHANGEHOMEDATA":
-        const { tapCurrent = 0 } = action.payload
-        return {
-          ...state,
-          tapCurrent
-        }
-      default:
-        return state
+    if(action.type ==  "LOGIN"){
+      const { data = {} } = action.payload
+      const { userInfo = {} } = data
+      const { unionid = '' } = userInfo
+      sessionStorage.setItem("userId", unionid);
+
+      return {
+        ...state,
+        userInfo,
+        userId:unionid
+      }
+
+    }else if( action.type ==  "POSTUSERINFO" ){
+      const { data = {} } = action.payload
+      const { userInfo = {} } = data
+      const { unionid = '' } = userInfo
+      sessionStorage.setItem("userId", unionid);
+      return {
+        ...state,
+        userInfo,
+        userId:unionid
+      };
+
+    }else if( action.type ==  "CHANGEHOMEDATA" ){
+      const { tapCurrent = 0 } = action.payload
+      return {
+        ...state,
+        tapCurrent
+      };
     }
+    return state
+    
   }
   
