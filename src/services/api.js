@@ -69,12 +69,13 @@ export default {
       }
     }
     
-    // let next = new Promise( (res,rej) =>{
-    //   Taro.request(option).then((result) =>{
-    //     res(result.data)
-    //   })
-    // })
-    return Taro.request(option)
+    let next = new Promise( (res,rej) =>{
+      Taro.request(option).then((result) =>{
+        res(result.data)
+      })
+    })
+    // return Taro.request(option)
+    return next
   },
   get(url, data) {
     let option = { url, data }

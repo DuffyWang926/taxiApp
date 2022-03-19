@@ -8,6 +8,10 @@ export default {
     'pages/login/index',
     'pages/mine/index',
     'pages/withdraw/index',
+    'pages/xingBake/index',
+    'pages/kenDeJi/index',
+    'pages/qianZhu/index',
+    'pages/dianFei/index',
     'pages/search/index'
   ],
   window: {

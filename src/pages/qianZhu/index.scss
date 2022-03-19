@@ -1,0 +1,30 @@
+.eLeMe{
+    width: 100%;
+    height: 100%;
+    background: #3f95ff url(../../assets/background/bg1.png);
+    text-align: center;
+    .eLeMeTop{
+        text-align: center;
+        color:#fff;
+    }
+    .eLeMeMid{
+        padding:50px 0;
+        width: 90%;
+        margin: auto;
+    }
+    .eLeMeBtn{
+        width: 80%;
+        height: 50px;
+        margin: auto;
+        text-align: center;
+        color: #d71700;
+        width: 80%;
+        border-radius: 25px;
+        background: linear-gradient(180deg,#ffee8e,#ffac3d);
+        font-size: 14px;
+    }
+    .redText{
+        color: #d71700;
+    }
+}
+

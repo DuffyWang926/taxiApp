@@ -128,6 +128,26 @@ export default class Index extends Component {
         url:'pages/huaXiaoZhu/index',
         title:'花小猪打车'
       },
+      {
+        typeId:5,
+        url:'pages/xingBaKe/index',
+        title:'星巴克'
+      },
+      {
+        typeId:6,
+        url:'pages/kenDeJi/index',
+        title:'肯德基'
+      },
+      {
+        typeId:7,
+        url:'pages/qianZhu/index',
+        title:'千猪电影'
+      },
+      {
+        typeId:8,
+        url:'pages/dianFei/index',
+        title:'充电费'
+      },
     ]
     const typeListCom = Array.isArray(typeProps) && typeProps.map( (v,i) =>{
       let res = (<TypeCom props={v} key={i + "type"}></TypeCom>)

@@ -10,7 +10,7 @@ import getUrlCode from "../../utils/getUrlCode";
 import {
   postLogin
 } from "../../actions/home";
-const bannerImg = require("../../assets/banner/banner3.png")
+const bannerImg = require("../../assets/banner/banner1.png")
 const mapStateToProps = (state)=>{
   const { home } = state
   const { userId } = home
@@ -24,7 +24,6 @@ const mapDispatchToProps = (dispatch) =>{
     postLogin:(payload)=>{
       dispatch(postLogin(payload));
     },
-    
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
@@ -39,7 +38,6 @@ export default class Index extends Component {
   }
 
 
-
   onRedClick = () =>{
     const { userId } = this.props
     const { path } = getCurrentInstance()?.router || {};
@@ -49,7 +47,7 @@ export default class Index extends Component {
         url
       })
     }else{
-      let url = "https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b"
+      let url = "https://activity01.yunzhanxinxi.com/link/eb45c1a0c7f552f2cf6d984dc4e7fdea"
       window.location.href = url
     }
     
@@ -58,7 +56,7 @@ export default class Index extends Component {
   
 
   render () {
-    const title = '滴滴'
+    const title = '千猪电影'
     return (
       <View className='eLeMe'>
         <View className='eLeMeTop'>
@@ -67,7 +65,7 @@ export default class Index extends Component {
         <Image className='eLeMeMid' src={bannerImg}></Image>
 
         <View className='eLeMeBtn' onClick={() => this.onRedClick()}>
-          领红包打车
+          领券下单
           {/* <a href="https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b" className='redText'>领红包打车</a> */}
         </View>
       </View>

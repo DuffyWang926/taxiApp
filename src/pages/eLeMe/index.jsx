@@ -6,6 +6,10 @@ import './index.scss'
 import { connect } from "../../utils/connect";
 
 import { history } from '@tarojs/router'
+import getUrlCode from "../../utils/getUrlCode";
+import {
+  postLogin
+} from "../../actions/home";
 const bannerImg = require("../../assets/banner/banner1.png")
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -16,13 +20,19 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    
+    postLogin:(payload)=>{
+      dispatch(postLogin(payload));
+    },
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
   componentDidMount(){
-    
+    let url = window.location.href
+    let code = getUrlCode(url)
+    if(code){
+      this.props.postLogin({code})
+    }
   }
 
   onRedClick = () =>{
