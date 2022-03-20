@@ -57,6 +57,7 @@ var fn_login = async (ctx, next) => {
             })
             let user = usersAll.length && usersAll[0]
             let { userId } = user
+            let upId = '111'
             if(!userId){
                 userId = '111'
             }
@@ -66,7 +67,7 @@ var fn_login = async (ctx, next) => {
                 let codeList = upCode.split('a')
                 if(codeList.length > 2){
                     userCodeNow = codeList[1] + 'a' + userIdNow + 'a'
-    
+                    upId = codeList[1]
                 }
             }else{
                 userCodeNow = '111a' + userIdNow + 'a'
@@ -75,6 +76,7 @@ var fn_login = async (ctx, next) => {
             userInfo = {
                 userId:userIdNow,
                 userCode:userCodeNow,
+                upId,
                 nickname,
                 sex,
                 province,
@@ -86,6 +88,7 @@ var fn_login = async (ctx, next) => {
 
             let nextUser = {
                 userId,
+                upId,
                 userCode:userCodeNow,
                 nickname,
                 sex,
