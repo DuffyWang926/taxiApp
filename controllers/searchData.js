@@ -1,5 +1,62 @@
 const axios = require('axios');
 const model = require('../model');
+const {formatLimit} = require('../utils/formatDate')
+
+
+const searchDataFn = async (ctx, next) => {
+    let userInfo = await login()
+    const { cookie } = userInfo
+
+    let userOrdersModel = model.userOrders
+    let userOrders = await userOrdersModel.findAll({
+        where:{
+            isCheck:0
+        },
+        order:[['clickTime', 'ASC']],
+    })
+    console.log('userOrders', userOrders)
+    let orderList = []
+    if(userOrders && userOrders.length){
+        userOrders.forEach( async v =>{
+            let beginTime = v && v.clickTime
+            let beginTimeFormat = formatLimit(beginTime)
+            let orderDaysModel = model.orderDays
+            let beginDay = await orderDaysModel.findAll({
+                where:{
+                    orderDay:beginTimeFormat
+                }
+            })
+            if(beginDay && beginDay.length == 0){
+                let newOrderDay = {
+                    id:beginTimeFormat,
+                    orderDay:beginTimeFormat,
+                    isCheck:0,
+                }
+
+                await orderDaysModel.create(newOrderDay)
+            }else{
+                let isCheck = beginDay[0]
+                if(isCheck == 0){
+                    orderList = await checkDayOrder(beginTime,cookie)
+                    computeAmount(v, orderList)
+                }
+            }
+
+
+        })
+        
+    }
+    
+
+    ctx.response.body = {
+                            code:200,
+                            data:{
+                                
+                            }
+                        }
+    
+    
+};
 
 const login = async (ctx, next) => {
     let url = `https://alliance.yunzhanxinxi.com/login`
@@ -15,7 +72,6 @@ const login = async (ctx, next) => {
         }
     })
     const { code, data, message, headers} = response
-    console.log('headers',headers)
     const cookie = headers['set-cookie']
     let result = {
         code,
@@ -27,40 +83,6 @@ const login = async (ctx, next) => {
     return result
 
 } 
-const searchDataFn = async (ctx, next) => {
-    let userInfo = await login()
-    const { cookie } = userInfo
-    let isNext = true
-    let page = 1
-    while(isNext){
-        let dataParam = {
-            page,
-            platform:'', 
-            orderStatus:'', 
-            settleStartTime:'', 
-            settleEndTime:'', 
-            orderNo:'',
-            payStartTime:'2022-03-13 00:00:00',
-            payEndTime:'2022-03-19 23:59:59',
-            promotionId:'',
-            allianceAffiliation:'',
-            rebateType:'',
-            commissionType:'',
-        }
-        let flag = await getList({dataParam, cookie})
-        isNext = flag
-        page += 1
-    }
-
-    ctx.response.body = {
-                            code:200,
-                            data:{
-                                
-                            }
-                        }
-    
-    
-};
 
 async function getList({param,cookie}){
     let detailUrl = 'https://alliance.yunzhanxinxi.com/order/list/index'
@@ -78,6 +100,8 @@ async function getList({param,cookie}){
     let tableData = data
     let tableList = []
     let isNext = false
+    console.log('responseData',responseData)
+
     if(code == 200){
         const { total, pageCount, pageSize, page, data } =tableData
         tableList = data || []
@@ -89,7 +113,7 @@ async function getList({param,cookie}){
             isNext = true 
         }
     }
-    return isNext
+    return { isNext, tableList}
 
 
 }
@@ -146,6 +170,95 @@ async function saveOrder(data){
 
 }
 
+async function checkDayOrder(beginTime,cookie){
+    let orderList = []
+    let isNextFlag = true
+    let page = 1 
+
+    let now = parseInt(new Date().getTime()/1000)
+    let beginDay = formatLimit(beginTime)
+    let nowDay = formatLimit(now)
+    if(nowDay != beginDay){
+        console.log('beginDay', beginDay)
+        let payStartTime = formatLimit(beginTime) + '00:00:00'
+        let payEndTime = formatLimit(beginTime) + '23:59:59'
+        console.log('payStartTime', payStartTime, payEndTime)
+
+        while(isNextFlag){
+            let dataParam = {
+                page,
+                platform:'', 
+                orderStatus:'', 
+                settleStartTime:'', 
+                settleEndTime:'', 
+                orderNo:'',
+                payStartTime,
+                payEndTime,
+                promotionId:'',
+                allianceAffiliation:'',
+                rebateType:'',
+                commissionType:'',
+            }
+            let response = await getList({dataParam, cookie})
+            const { isNext, tableList } =response
+            orderList = orderList.concat(tableList)
+            isNextFlag = isNext
+            page += 1
+        }
+
+    
+    }
+    return orderList
+    
+}
+
+async function computeAmount(userOrder, orderList){
+    const { clickTime, userId } = userOrder
+    orderList.sort( (a,b) =>{
+        return a.paid_time - b.paid_time
+    })
+    let isCheck = false
+    orderList.forEach( async v =>{
+        const { paid_time, settle_amount } = v
+        let paidTime = new Date(paid_time).getTime()
+        let timeDiff = parseInt((paidTime - clickTime)/1000/60)
+        if(timeDiff < 10){
+            isCheck = true
+            let userAccountsModel = model.userAccounts
+            let userAccounts = userAccountsModel.findAll({
+                where:{
+                    userId
+                }
+            })
+            if(userAccounts && userAccounts.length == 0){
+                let userAccount = userAccounts[0]
+                const { amount } = userAccount
+                let usersModel = model.users
+                let users = await usersModel.findAll({
+                    userId
+                })
+                if(users && users.length > 0){
+                    const { upId } = userId[0]
+                    let newAccount = {
+                        id:userId,
+                        userId:userId,
+                        upId,
+                        amount:settle_amount,
+                    }
+                    userAccountsModel.create(newAccount)
+                }
+                
+            }else{
+                let nextAmount = +amount + settle_amount + ''
+                userAccount.amount = nextAmount
+                await userAccountsModel.update(userAccount)
+            }
+
+        }
+    })
+    return isCheck
+
+}
 module.exports = {
     'GET /taxiapi/searchData': searchDataFn,
 };
