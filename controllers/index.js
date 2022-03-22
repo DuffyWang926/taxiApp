@@ -63,7 +63,7 @@ var fn_login = async (ctx, next) => {
             if(!userId){
                 userId = '111'
             }
-            let userIdNow = userId + 1
+            let userIdNow = +userId + 1
             let userCodeNow = ''
             if( upCode ){
                 let codeList = upCode.split('a')
