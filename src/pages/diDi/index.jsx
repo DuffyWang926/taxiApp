@@ -8,7 +8,8 @@ import { connect } from "../../utils/connect";
 import { history } from '@tarojs/router'
 import getUrlCode from "../../utils/getUrlCode";
 import {
-  postLogin
+  postLogin,
+  recordTime
 } from "../../actions/home";
 const bannerImg = require("../../assets/banner/banner3.png")
 const mapStateToProps = (state)=>{
@@ -24,7 +25,9 @@ const mapDispatchToProps = (dispatch) =>{
     postLogin:(payload)=>{
       dispatch(postLogin(payload));
     },
-    
+    recordTime:(payload)=>{
+      dispatch(recordTime(payload));
+    },
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
@@ -49,6 +52,8 @@ export default class Index extends Component {
         url
       })
     }else{
+      let clickTime = new Date().getTime() + ''
+      this.props.recordTime({userId, clickTime})
       let url = "https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b"
       window.location.href = url
     }

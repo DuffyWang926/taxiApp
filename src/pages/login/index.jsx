@@ -69,6 +69,12 @@ export default class Index extends Component {
   
 
   render () {
+
+    // let appid = 'wxe52a97ff5cbcfc9a'
+    // let redirectUrl = 'https://www.mengshikejiwang.top/#/pages/mine/index'
+    // let encodeUrl = encodeURIComponent(redirectUrl)
+    // let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
+
     const { oldUrl = 'pages/index/index', upCode } = this.state
     let redirectUrl = 'https://www.mengshikejiwang.top/#' + oldUrl
     console.log('redirectUrl', redirectUrl)

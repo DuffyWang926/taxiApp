@@ -5,10 +5,10 @@ import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './index.scss'
 import { connect } from "../../utils/connect";
 
-import { history } from '@tarojs/router'
 import getUrlCode from "../../utils/getUrlCode";
 import {
-  postLogin
+  postLogin,
+  recordTime
 } from "../../actions/home";
 const bannerImg = require("../../assets/banner/banner4.jpg")
 const mapStateToProps = (state)=>{
@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) =>{
   return {
     postLogin:(payload)=>{
       dispatch(postLogin(payload));
+    },
+    recordTime:(payload)=>{
+      dispatch(recordTime(payload));
     },
   }
 }
@@ -45,6 +48,8 @@ export default class Index extends Component {
         url
       })
     }else{
+      let clickTime = new Date().getTime() + ''
+      this.props.recordTime({userId, clickTime})
       let url = "https://activity01.yunzhanxinxi.com/link/442716629117e2144d5eaec13352fb14"
       window.location.href = url
     }
