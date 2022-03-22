@@ -4,27 +4,32 @@ import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
-import {
-  changeHomeData
-} from "../../actions/home";
-import { history } from '@tarojs/router'
 import TapCom from "../../components/TapCom";
 import {
+  changeHomeData,
   postLogin
 
 } from "../../actions/home";
+import {
+  getSearchData
+
+} from "../../actions/mine";
+
 const moneyImg = require("../../assets/icon/money.png")
+const portraitImg = require("../../assets/portrait.svg")
+const shareImg = require("../../assets/icon/share.svg")
 import getUrlCode from "../../utils/getUrlCode";
 const mapStateToProps = (state)=>{
   const { home } = state
-  const { userInfo = {}, userId } = home
-  const { nickname, headimgurl, openid } = userInfo
+  const { userInfo = {},   } = home
+  const { nickname, headimgurl, openid, upId, userCode } = userInfo
   
     return {
       nickname,
       headimgurl,
       openid,
-      userId
+      userCode,
+      upId
     }
 
 }
@@ -35,24 +40,36 @@ const mapDispatchToProps = (dispatch) =>{
     },
     changeHomeData:(payload)=>{
       dispatch(changeHomeData(payload));
-    }
+    },
+    getSearchData:(payload)=>{
+      dispatch(getSearchData(payload));
+    },
+    
     
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
 
-  componentDidMount(){
-    this.props.changeHomeData({ tapCurrent:2})
+  constructor(props){
+    super(props)
     let url = window.location.href
-    let code = getUrlCode(url)
-    let upCode = sessionStorage.getItem('upCode')
+    let code = getUrlCode(url) || ''
+    let upCode = sessionStorage.getItem('upCode') || ''
     if(code){
-      this.props.postLogin({ code, upCode})
+      props.postLogin({ code, upCode})
     }
+
   }
 
-  loginClick = () =>{
+  componentDidMount(){
+    // this.props.getSearchData()
+    this.props.changeHomeData({ tapCurrent:2})
+  }
+
+  
+
+  loginClick = async () =>{
     const { path } = getCurrentInstance()?.router || {};
     let url = 'pages/login/index?oldUrl=' + path
     Taro.navigateTo({
@@ -84,7 +101,8 @@ export default class Index extends Component {
   
 
   render () {
-    const { nickname, headimgurl, userId, userCode } = this.props
+    const { nickname, headimgurl, upId, userCode } = this.props
+    let portraitImgSrc = headimgurl || portraitImg
     return (
       <View className='mine'>
         <View className='mineTop'>
@@ -92,21 +110,19 @@ export default class Index extends Component {
         </View>
         <View className='mineInfoBox'>
           <View className='mineInfoLeft'>
-            <Image className='mineImg' src={headimgurl}></Image>
+            <Image className='mineImg' src={portraitImgSrc}></Image>
             <View className='mineInfo'>
               { nickname ? <View onClick={() =>{ this.loginClick()}}>{nickname}</View>
               : <View onClick={() =>{ this.loginClick()}}>点击登录</View>
               }
-              <View>ID:{userId}</View>
-              <View>推荐人:{userCode}</View>
+              <View>ID:{userCode}</View>
+              <View>推荐人:{upId}</View>
             </View>
           </View>
           <View className='mineInfoRight' onClick={this.onShare}>
-            {/* <Image className='mineShareImg'></Image> */}
-            <View>分享</View>
+            <Image className='mineShareImg' src={shareImg}></Image>
+            <View>分享赚佣</View>
           </View>
-
-          
           
         </View>
         <View className='mineMoney'>

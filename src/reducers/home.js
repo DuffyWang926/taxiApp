@@ -11,20 +11,19 @@
     if(action.type ==  "LOGIN"){
       const { data = {} } = action.payload
       const { userInfo = {} } = data
-      const { unionid = '' } = userInfo
-      sessionStorage.setItem("userId", unionid);
-
+      const { userId = '' } = userInfo
+      sessionStorage.setItem("userId", userId);
       return {
         ...state,
         userInfo,
-        userId:unionid
+        userId:userId
       }
 
     }else if( action.type ==  "POSTUSERINFO" ){
       const { data = {} } = action.payload
       const { userInfo = {} } = data
       const { userId = '' } = userInfo
-      sessionStorage.setItem("userId", unionid);
+      sessionStorage.setItem("userId", userId);
       return {
         ...state,
         userInfo,

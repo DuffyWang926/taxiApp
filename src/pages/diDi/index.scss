@@ -16,13 +16,14 @@
         width: 80%;
         height: 50px;
         margin: auto;
-        text-align: center;
-        vertical-align: middle;
         color: #d71700;
         width: 80%;
         border-radius: 25px;
         background: linear-gradient(180deg,#ffee8e,#ffac3d);
         font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .redText{
         color: #d71700;

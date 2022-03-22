@@ -6,7 +6,8 @@ import './index.scss'
 import { connect } from "../../utils/connect";
 import getUrlCode from "../../utils/getUrlCode";
 import {
-  postLogin
+  postLogin,
+  recordTime
 } from "../../actions/home";
 const bannerImg = require("../../assets/banner/banner1.png")
 const mapStateToProps = (state)=>{
@@ -22,6 +23,9 @@ const mapDispatchToProps = (dispatch) =>{
     postLogin:(payload)=>{
       dispatch(postLogin(payload));
     },
+    recordTime:(payload)=>{
+      dispatch(recordTime(payload));
+    },
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
@@ -35,10 +39,9 @@ export default class Index extends Component {
     }
   }
 
-
-
   onRedClick = () =>{
     const { userId } = this.props
+
     const { path } = getCurrentInstance()?.router || {};
     if(!userId){
       let url = 'pages/login/index?oldUrl=' + path
@@ -46,6 +49,8 @@ export default class Index extends Component {
         url
       })
     }else{
+      let clickTime = new Date().getTime() + ''
+      this.props.recordTime({userId, clickTime})
       let url = "https://activity01.yunzhanxinxi.com/link/68b1e80d30b996baea1acb9200ec5b01"
       window.location.href = url
     }
