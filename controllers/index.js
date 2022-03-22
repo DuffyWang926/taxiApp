@@ -16,6 +16,7 @@ var fn_login = async (ctx, next) => {
     const { data={} } = response
     const {  refresh_token, errcode } = data
     console.log('DATA', data)
+    console.log('Time', new Date())
     let userInfo =  { 
                         nickname: '',
                         sex:-1,
@@ -23,7 +24,8 @@ var fn_login = async (ctx, next) => {
                         city:'',
                         headimgurl:'',
                         openid:'',
-                        unionid:'test'
+                        unionid:'test',
+                        userId:'test'
                     }
     if(!errcode){
         let refreshUrl = `https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=wxe52a97ff5cbcfc9a&grant_type=refresh_token&refresh_token=${refresh_token}`
@@ -128,10 +130,31 @@ var fn_login = async (ctx, next) => {
                         }
     
     
-};
+}
+
+async function fnGetOpenId(){
+    let body = ctx.request.body
+    let { code } = body
+    let secret = '1d3b61572a9edbb288b25472f4e1fb60'
+    let url = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxe52a97ff5cbcfc9a&secret=${secret}&code=${code}&grant_type=authorization_code`
+    let response = await axios({
+        method: "GET",
+        url: url,
+    })
+    const { data={} } = response
+    const { openid } = data
+    ctx.response.body = {
+        code:200,
+        data:{
+            openid
+        }
+    }
+
+}
 
 
 module.exports = {
     'POST /taxiapi/login': fn_login,
     'GET /taxiapi/login': fn_login,
+    'POST /taxiapi/getopenid': fnGetOpenId,
 };
