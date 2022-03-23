@@ -79,7 +79,7 @@ var fn_login = async (ctx, next) => {
                 userId:userIdNow,
                 userCode:userCodeNow,
                 upId,
-                upCode,
+                upCode:upCode || '',
                 nickname,
                 sex,
                 province,
@@ -92,7 +92,7 @@ var fn_login = async (ctx, next) => {
             let nextUser = {
                 userId,
                 upId,
-                upCode,
+                upCode:upCode || '',
                 userCode:userCodeNow,
                 nickname,
                 sex,
