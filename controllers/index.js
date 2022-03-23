@@ -57,7 +57,7 @@ var fn_login = async (ctx, next) => {
                 order:[['updatedAt', 'DESC']],
                 limit:1
             })
-            let user = usersAll.length && usersAll[0]
+            let  user  = usersAll.length && usersAll[0]
             let { userId } = user
             let upId = '111'
             if(!userId){
@@ -92,6 +92,7 @@ var fn_login = async (ctx, next) => {
             let nextUser = {
                 userId,
                 upId,
+                upCode,
                 userCode:userCodeNow,
                 nickname,
                 sex,
