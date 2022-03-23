@@ -22,14 +22,14 @@ import getUrlCode from "../../utils/getUrlCode";
 const mapStateToProps = (state)=>{
   const { home } = state
   const { userInfo = {},   } = home
-  const { nickname, headimgurl, openid, upId, userCode } = userInfo
+  const { nickname, headimgurl, openid, upCode, userCode } = userInfo
   
     return {
       nickname,
       headimgurl,
       openid,
       userCode,
-      upId
+      upCode
     }
 
 }
@@ -101,7 +101,7 @@ export default class Index extends Component {
   
 
   render () {
-    const { nickname, headimgurl, upId, userCode } = this.props
+    const { nickname, headimgurl, upCode, userCode } = this.props
     let portraitImgSrc = headimgurl || portraitImg
     return (
       <View className='mine'>
@@ -116,7 +116,7 @@ export default class Index extends Component {
               : <View onClick={() =>{ this.loginClick()}}>点击登录</View>
               }
               <View>ID:{userCode}</View>
-              <View>推荐人:{upId}</View>
+              <View>推荐人:{upCode}</View>
             </View>
           </View>
           <View className='mineInfoRight' onClick={this.onShare}>
