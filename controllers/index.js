@@ -6,7 +6,6 @@ const Op = Sequelize.Op
 var fn_login = async (ctx, next) => {
     let body = ctx.request.body
     let { code, upCode = '' } = body
-    // code = '0312will2ybAQ84sUTnl2ULBlj02wilP'
     let secret = '1d3b61572a9edbb288b25472f4e1fb60'
     let url = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxe52a97ff5cbcfc9a&secret=${secret}&code=${code}&grant_type=authorization_code`
     let response = await axios({
@@ -74,7 +73,6 @@ var fn_login = async (ctx, next) => {
             }else{
                 userCodeNow = '111a' + userIdNow + 'a'
             }
-
             userInfo = {
                 userId:userIdNow,
                 userCode:userCodeNow,
@@ -88,9 +86,8 @@ var fn_login = async (ctx, next) => {
                 openid,
                 unionid
             }
-
             let nextUser = {
-                userId,
+                userId:userIdNow,
                 upId,
                 upCode:upCode || '',
                 userCode:userCodeNow,
@@ -119,10 +116,7 @@ var fn_login = async (ctx, next) => {
                 openid,
                 unionid
             }
-
         }
-        
-        
     }
     ctx.response.body = {
                             code:200,
@@ -130,7 +124,6 @@ var fn_login = async (ctx, next) => {
                                 userInfo
                             }
                         }
-    
     
 }
 
