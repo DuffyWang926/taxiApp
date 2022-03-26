@@ -63,7 +63,7 @@ export default class Index extends Component {
   }
 
   componentDidMount(){
-    // this.props.getSearchData()
+    this.props.getSearchData()
     this.props.changeHomeData({ tapCurrent:2})
   }
 

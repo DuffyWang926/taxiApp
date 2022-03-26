@@ -5,7 +5,8 @@ import { View, TabBar, Swiper, SwiperItem, Image } from '@tarojs/components'
 import './index.scss'
 import { connect } from "../../utils/connect";
 import {
-  changeHomeData
+  changeHomeData,
+  postLogin
 
 } from "../../actions/home";
 
@@ -33,7 +34,10 @@ const mapDispatchToProps = (dispatch) =>{
   return {
     changeHomeData:(payload)=>{
       dispatch(changeHomeData(payload));
-    }
+    },
+    postLogin:(payload)=>{
+      dispatch(postLogin(payload));
+    },
     
   }
 }
@@ -64,6 +68,31 @@ export default class Index extends Component {
     this.state={
       bannerList,
       bannerCurrent:0
+    }
+  }
+
+  componentDidMount(){
+    let url = window.location.href
+    let code = ''
+    let nextList = url.split('?')
+    let nextUrl = nextList.length > 0 && nextList[1]
+    let paramsList = nextUrl && nextUrl.split('&')
+    let urlUpCode = ''
+    Array.isArray(paramsList) && paramsList.map( (v,i) =>{
+      let endList = v && v.split('=')
+      if(endList.length > 0){
+        if(endList[0] == 'upCode'){
+          urlUpCode = endList[1]
+        }else if(endList[0] == 'code'){
+          code = endList[1]
+        }
+      }
+      
+    })
+    let upCode = sessionStorage.getItem('upCode') || urlUpCode
+
+    if(code){
+      this.props.postLogin({code,upCode})
     }
   }
 
