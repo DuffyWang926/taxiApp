@@ -45,8 +45,8 @@ export default class Index extends Component {
 
   onRedClick = () =>{
     // const { userId } = this.props
-    let userId = sessionStorage.getItem('userId')
     const { path } = getCurrentInstance()?.router || {};
+    let userId = sessionStorage.getItem("userId");
     if(!userId){
       let url = 'pages/login/index?oldUrl=' + path
       Taro.navigateTo({
