@@ -53,9 +53,8 @@ export default class Index extends Component {
         url
       })
     }else{
-      // let clickTime = new Date().getTime() + ''
-      let clickTime = new Date('2022-3-14').getTime() + ''
-      debugger
+      let clickTime = new Date().getTime() + ''
+      // let clickTime = new Date('2022-3-14').getTime() + ''
       this.props.recordTime({userId, clickTime})
       let url = "https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b"
       window.location.href = url
