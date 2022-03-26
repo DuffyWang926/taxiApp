@@ -44,9 +44,8 @@ export default class Index extends Component {
 
 
   onRedClick = () =>{
-    // const { userId } = this.props
+    const { userId } = this.props
     const { path } = getCurrentInstance()?.router || {};
-    let userId = sessionStorage.getItem("userId");
     if(!userId){
       let url = 'pages/login/index?oldUrl=' + path
       Taro.navigateTo({
@@ -54,6 +53,7 @@ export default class Index extends Component {
       })
     }else{
       let clickTime = new Date().getTime() + ''
+      debugger
       this.props.recordTime({userId, clickTime})
       let url = "https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b"
       window.location.href = url
