@@ -9,7 +9,7 @@ module.exports = db.defineModel('userOrders', {
 
 
 // create table userOrders (
-//     id varchar(10) not null,
+//     id varchar(40) not null,
 //     userId varchar(10) not null,
 //     clickTime varchar(40),
 //     isCheck bigint,

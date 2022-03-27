@@ -13,7 +13,7 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
     host: config.host,
     dialect: config.dialect,
     pool: {
-        max: 5,
+        max: 15,
         min: 0,
         idle: 10000
     }
