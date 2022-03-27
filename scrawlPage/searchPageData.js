@@ -5,7 +5,7 @@ const chalk = require('chalk')
 const log = console.log
 async function searchPageData (startTime) {
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
     })
     let url = 'https://pub.yunzhanxinxi.com'
     let dataList = []
