@@ -17,7 +17,7 @@ const searchDataFn = async (ctx, next) => {
         },
         order:[['clickTime', 'ASC']],
     })
-    console.log('userOrders', userOrders)
+    console.log('userOrders', userOrders?.length)
     if(userOrders && userOrders.length){
         let userOrderDays = []
         let userOrderDayList = []
@@ -54,7 +54,7 @@ const searchDataFn = async (ctx, next) => {
                         orderDay:beginTimeFormat
                     }
                 })
-                console.log('beginDay',beginDay)
+                console.log('beginDay',beginDay?.length)
                 if(beginDay && beginDay.length == 0){
                     let newOrderDay = {
                         id:beginTimeFormat,
