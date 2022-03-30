@@ -5,7 +5,7 @@ const chalk = require('chalk')
 const log = console.log
 const fnSearchPageData = async (ctx, next) => {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
     })
     let url = 'https://pub.yunzhanxinxi.com'
     let dataList = []
@@ -17,7 +17,7 @@ const fnSearchPageData = async (ctx, next) => {
         //登录
         await page.waitForTimeout(2000)
         await page.waitForSelector('.offline-btn')
-        await page.click('.offline-btn')
+        // await page.click('.offline-btn')
         await page.click('.login_type-item:nth-last-child(1)')
         let phone = '15321830653'
         let pwd = 'Wef1991926'
@@ -34,7 +34,7 @@ const fnSearchPageData = async (ctx, next) => {
         await page.click('.layout_menu-items>li:nth-child(2)')
         await page.waitForTimeout(1000)
         //时间设置
-        var startTime = '2022-03-14 00:00:00'
+        var startTime = new Date('2022-03-14 00:00:00').getTime()
         let inputNode = await page.$('.el-range-input')
         inputNode.click()
         await page.waitForTimeout(1000)
@@ -49,6 +49,7 @@ const fnSearchPageData = async (ctx, next) => {
         let startMonth = new Date(+startTime).getMonth() + 1
         let startDay = new Date(+startTime).getDate()
         log(headerText)
+        log('startDay',startDay)
         if(startMonth < headerMonth){
             await page.click('.el-date-range-picker__header>button:nth-child(2)')
             await page.waitForTimeout(1000)

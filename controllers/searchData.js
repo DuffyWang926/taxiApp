@@ -6,6 +6,7 @@ const _ = require('lodash')
 const log = console.log
 
 const searchDataFn = async (ctx, next) => {
+    log('/taxiapi/searchData')
     // let userInfo = await login()
     // const { cookie } = userInfo
     // let nextCookie = cookie

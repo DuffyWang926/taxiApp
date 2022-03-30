@@ -6,6 +6,7 @@ const log = console.log
 async function searchPageData (startTime) {
     const browser = await puppeteer.launch({
         headless: true,
+        args:['--no-sandbox']
     })
     let url = 'https://pub.yunzhanxinxi.com'
     let dataList = []
@@ -17,7 +18,8 @@ async function searchPageData (startTime) {
         //登录
         await page.waitForTimeout(2000)
         await page.waitForSelector('.offline-btn')
-        await page.click('.offline-btn')
+        
+        // await page.click('.offline-btn')
         await page.click('.login_type-item:nth-last-child(1)')
         let phone = '15321830653'
         let pwd = 'Wef1991926'
