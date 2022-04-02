@@ -18,6 +18,7 @@ import {
 const moneyImg = require("../../assets/icon/money.png")
 const portraitImg = require("../../assets/portrait.svg")
 const shareImg = require("../../assets/icon/share.svg")
+const clientImg = require("../../assets/icon/clientService.svg")
 import getUrlCode from "../../utils/getUrlCode";
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -53,10 +54,11 @@ export default class Index extends Component {
 
   constructor(props){
     super(props)
+    const { userId } = props
     let url = window.location.href
     let code = getUrlCode(url) || ''
     let upCode = sessionStorage.getItem('upCode') || ''
-    if(code){
+    if(code && !userId){
       props.postLogin({ code, upCode})
     }
 
@@ -97,6 +99,15 @@ export default class Index extends Component {
       url
     })
   }
+
+  onClientService = () =>{
+    let url = 'pages/clientservice/index'
+    Taro.navigateTo({
+      url
+    })
+  }
+
+  
 
   
 
@@ -175,6 +186,12 @@ export default class Index extends Component {
             提现
           </View>
 
+        </View>
+        <View className='clientService' onClick={this.onClientService}>
+          <Image className='mineClientImg' src={clientImg}></Image>
+          <View>
+            客服
+          </View>
         </View>
         <TapCom ></TapCom>
        
