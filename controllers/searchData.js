@@ -7,9 +7,6 @@ const log = console.log
 
 const searchDataFn = async (ctx, next) => {
     log('/taxiapi/searchData')
-    // let userInfo = await login()
-    // const { cookie } = userInfo
-    // let nextCookie = cookie
 
     let userOrdersModel = model.userOrders
     let userOrders = await userOrdersModel.findAll({
@@ -77,7 +74,7 @@ const searchDataFn = async (ctx, next) => {
                                 let  checkRes  = await computeAmount(v, orderList)
                                 checkResList.push(checkRes)
                             }else{
-                                await computeListAmount(item, orderList, true)
+                            await computeListAmount(item, orderList, true)
                             }
                         }
                         // if(updateFlag){
@@ -383,7 +380,9 @@ async function updateAmount(userId, amount){
     let nextamount= +amount
     let usersModel = model.user
     let users = await usersModel.findAll({
-        userId
+        where:{
+            userId:userId
+        }
     })
     let upId = ''
     if(users && users.length > 0){
@@ -392,8 +391,8 @@ async function updateAmount(userId, amount){
     let userAccountsModel = model.userAccounts
 
     let userAccounts = await userAccountsModel.findAll({
-        where:{
-            userId
+        where: {
+            userId:userId
         }
     })
     
@@ -408,7 +407,7 @@ async function updateAmount(userId, amount){
         await userAccountsModel.create(newAccount)
     }else{
         let userAccount = userAccounts[0]
-        let { amount } = userAccount
+        let { id, userId, upId, amount} = userAccount
         let amnountNow = Math.floor(nextamount * 100 * 0.3 * 0.6  ) /100
         if(upId){
             if(upId !== '111'){
@@ -417,7 +416,14 @@ async function updateAmount(userId, amount){
         }
         let nextAmount = +amount + amnountNow + ''
         userAccount.amount = nextAmount
-        await userAccountsModel.update(userAccount)
+        
+        let nextUserAccount={
+            id,
+            userId,
+            upId,
+            amount:nextAmount
+        }
+        await userAccountsModel.update(nextUserAccount,{where:{userId}})
         if(upId){
             let upNextAmount = Math.floor(amnountNow *100 /0.7 *0.3 )/100
             await updateAmount(upId, upNextAmount)
