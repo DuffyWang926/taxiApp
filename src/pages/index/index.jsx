@@ -19,6 +19,9 @@ const bannerImgA = require("../../assets/banner/banner1.png")
 const bannerImgB = require("../../assets/banner/banner2.png")
 const bannerImgC = require("../../assets/banner/banner3.png")
 const bannerImgD = require("../../assets/banner/banner4.jpg")
+const bannerImgE = require("../../assets/banner/banner5.png")
+const bannerImgF = require("../../assets/banner/banner6.png")
+
 
 const homeImg = require("../../assets/thanks.jpg")
 const mapStateToProps = (state)=>{
@@ -62,6 +65,14 @@ export default class Index extends Component {
       {
         url:'pages/huaXiaoZhu/index',
         imgSrc:bannerImgD
+      },
+      {
+        url:'pages/kendeji/index',
+        imgSrc:bannerImgE
+      },
+      {
+        url:'pages/xingbake/index',
+        imgSrc:bannerImgF
       },
     ]
 

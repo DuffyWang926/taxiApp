@@ -1,16 +1,20 @@
-.eLeMe{
+.dianFei{
     width: 100%;
     height: 100%;
-    background: #3f95ff url(../../assets/background/bg1.png);
+    background: #3f95ff;
     text-align: center;
     .eLeMeTop{
         text-align: center;
         color:#fff;
     }
-    .eLeMeMid{
+    .dianFeiMid{
         padding:50px 0;
         width: 90%;
         margin: auto;
+        height: 600px;
+        img{
+            border-radius: 50px;
+        }
     }
     .eLeMeBtn{
         width: 80%;

@@ -11,6 +11,8 @@ import {
   postLogin,
   recordTime
 } from "../../actions/home";
+import BuyBtn from '../../components/BuyBtn'
+import OrderTipCom from '../../components/OrderTipCom'
 const bannerImg = require("../../assets/banner/banner1.png")
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -38,38 +40,22 @@ export default class Index extends Component {
       this.props.postLogin({code})
     }
   }
-
-  onRedClick = () =>{
-    const { userId } = this.props
-    const { path } = getCurrentInstance()?.router || {};
-    if(!userId){
-      let url = 'pages/login/index?oldUrl=' + path
-      Taro.navigateTo({
-        url
-      })
-    }else{
-      let clickTime = new Date().getTime() + ''
-      this.props.recordTime({userId, clickTime})
-      let url = "https://activity01.yunzhanxinxi.com/link/a0750efe9f833c5633140d2b4f29c0dd"
-      window.location.href = url
-
-    }
-    
-  }
+ 
 
   render () {
     const title = '饿了么'
+    const btnProps = {
+      msg:'领红包点外卖',
+      url:"https://activity01.yunzhanxinxi.com/link/a0750efe9f833c5633140d2b4f29c0dd"
+    }
     return (
       <View className='eLeMe'>
         <View className='eLeMeTop'>
           {title}
         </View>
         <Image className='eLeMeMid' src={bannerImg}></Image>
-
-        <View className='eLeMeBtn' onClick={() => this.onRedClick()}>
-          领红包点外卖
-          {/* <a href="https://activity01.yunzhanxinxi.com/link/a0750efe9f833c5633140d2b4f29c0dd" className='redText'>领红包点外卖</a> */}
-        </View>
+        <OrderTipCom />
+        <BuyBtn data={btnProps} />
       </View>
     )
   }

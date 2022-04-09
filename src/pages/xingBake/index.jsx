@@ -11,7 +11,8 @@ import {
   postLogin,
   recordTime
 } from "../../actions/home";
-const bannerImg = require("../../assets/banner/banner1.png")
+import BuyBtn from '../../components/BuyBtn'
+const bannerImg = require("../../assets/banner/banner6.png")
 const mapStateToProps = (state)=>{
   const { home } = state
   const { userId } = home
@@ -41,38 +42,19 @@ export default class Index extends Component {
     }
   }
 
-  onRedClick = () =>{
-    const { userId } = this.props
-    const { path } = getCurrentInstance()?.router || {};
-    if(!userId){
-      let url = 'pages/login/index?oldUrl=' + path
-      Taro.navigateTo({
-        url
-      })
-    }else{
-      let clickTime = new Date().getTime() + ''
-      this.props.recordTime({userId, clickTime})
-      let url = "https://activity01.yunzhanxinxi.com/link/7e78214436bc2ad8de16ccdef393201c"
-      window.location.href = url
-    }
-    
-  }
-
-  
-
   render () {
     const title = '星巴克'
+    const btnProps = {
+      msg:'公众号下单享优惠',
+      url:"https://activity01.yunzhanxinxi.com/link/7e78214436bc2ad8de16ccdef393201c"
+    }
     return (
       <View className='eLeMe'>
         <View className='eLeMeTop'>
           {title}
         </View>
-        <Image className='eLeMeMid' src={bannerImg}></Image>
-
-        <View className='eLeMeBtn' onClick={() => this.onRedClick()}>
-          领券下单
-          {/* <a href="https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b" className='redText'>领红包打车</a> */}
-        </View>
+        <Image className='pageBanner' src={bannerImg}></Image>
+        <BuyBtn data={btnProps} />
       </View>
     )
   }

@@ -11,6 +11,8 @@ import {
   postLogin,
   recordTime
 } from "../../actions/home";
+import BuyBtn from '../../components/BuyBtn'
+import OrderTipCom from '../../components/OrderTipCom'
 const bannerImg = require("../../assets/banner/banner3.png")
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -41,42 +43,20 @@ export default class Index extends Component {
     }
   }
 
-
-
-  onRedClick = () =>{
-    const { userId } = this.props
-    const { path } = getCurrentInstance()?.router || {};
-    // const userId = sessionStorage.getItem('userId')
-    if(!userId){
-      let url = 'pages/login/index?oldUrl=' + path
-      Taro.navigateTo({
-        url
-      })
-    }else{
-      let clickTime = new Date().getTime() + ''
-      // let clickTime = new Date('2022-3-14').getTime() + ''
-      this.props.recordTime({userId, clickTime})
-      let url = "https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b"
-      window.location.href = url
-    }
-    
-  }
-
-  
-
   render () {
     const title = '滴滴'
+    const btnProps = {
+      msg:'领红包打车',
+      url:"https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b"
+    }
     return (
       <View className='eLeMe'>
         <View className='eLeMeTop'>
           {title}
         </View>
-        <Image className='eLeMeMid' src={bannerImg}></Image>
-
-        <View className='eLeMeBtn' onClick={() => this.onRedClick()}>
-          领红包打车
-          {/* <a href="https://activity01.yunzhanxinxi.com/link/6dfca0bd3c0f799d36b2666973e1c42b" className='redText'>领红包打车</a> */}
-        </View>
+        <Image className='pageBanner' src={bannerImg}></Image>
+        <OrderTipCom />
+        <BuyBtn data={btnProps} />
       </View>
     )
   }

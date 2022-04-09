@@ -10,6 +10,9 @@ import {
   postLogin,
   recordTime
 } from "../../actions/home";
+import BuyBtn from '../../components/BuyBtn'
+import OrderTipCom from '../../components/OrderTipCom'
+
 const bannerImg = require("../../assets/banner/banner4.jpg")
 const mapStateToProps = (state)=>{
   const { home } = state
@@ -50,7 +53,7 @@ export default class Index extends Component {
     }else{
       let clickTime = new Date().getTime() + ''
       this.props.recordTime({userId, clickTime})
-      let url = "https://activity01.yunzhanxinxi.com/link/442716629117e2144d5eaec13352fb14"
+      let url = 
       window.location.href = url
     }
   }
@@ -58,17 +61,18 @@ export default class Index extends Component {
 
   render () {
     const title = '花小猪'
+    const btnProps = {
+      msg:'领红包打车',
+      url:"https://activity01.yunzhanxinxi.com/link/442716629117e2144d5eaec13352fb14"
+    }
     return (
       <View className='eLeMe'>
         <View className='eLeMeTop'>
           {title}
         </View>
-        <Image className='eLeMeMid' src={bannerImg}></Image>
-
-        <View className='eLeMeBtn' onClick={() => this.onRedClick()}>
-          领红包打车
-          {/* <a href="https://activity01.yunzhanxinxi.com/link/442716629117e2144d5eaec13352fb14" className='redText'>领红包打车</a> */}
-        </View>
+        <Image className='pageBanner' src={bannerImg}></Image>
+        <OrderTipCom />
+        <BuyBtn data={btnProps} />
       </View>
     )
   }
