@@ -74,7 +74,7 @@ export default class Index extends Component {
     const title = '千猪电影'
     const btnProps = {
       msg:'公众号下单享优惠',
-      url:"https://activity01.yunzhanxinxi.com/link/426441e5060dafbf0a675c0c19a3b74a"
+      url:"https://activity01.yunzhanxinxi.com/link/f073d89bcebb3941f5c0aad60ec914ef"
     }
     return (
       <View className='eLeMe'>
