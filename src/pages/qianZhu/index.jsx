@@ -34,6 +34,14 @@ const mapDispatchToProps = (dispatch) =>{
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
 
+  constructor(props){
+    super(props)
+    // const oldUrl = '/pages/mine/index'
+    // let redirectUrl = 'https://www.mengshikejiwang.top/#' + oldUrl
+    // let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=${redirectUrl}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
+    // window.location.href = url
+  }
+
   componentDidMount(){
     let url = window.location.href
     let code = getUrlCode(url)

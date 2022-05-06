@@ -81,8 +81,8 @@ export default class Index extends Component {
     console.log('redirectUrl', redirectUrl)
     let REDIRECT_URI = encodeURIComponent(redirectUrl)
     console.log('REDIRECT_URI', REDIRECT_URI)
-    
-    // let url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx512bb00bd04fa445&redirect_uri=https%3A%2F%2Fwx.lanjingv.com%2Fh5%2F%23%2Fpages%2Flogin%2Flogin&response_type=code&scope=snsapi_userinfo&state=123&connect_redirect=1#wechat_redirect'
+    // let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
+    // let url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=https%3A%2F%2Fwww.mengshikejiwang.top%2F%23%2Fpages%2Fmine%2Findex&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'
     let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`
     
     return (
