@@ -3,12 +3,12 @@
   
   const INITIAL_STATE = {
     getGoodsParams:{
-      keyword:'',
+      keyword:'手机',
       isInit:'0',
       size:4
     },
     getGoodsUrlParams:{
-      keyword:'',
+      keyword:'手机',
       isInit:'1',
       size:4
     },

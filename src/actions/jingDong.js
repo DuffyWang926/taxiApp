@@ -2,7 +2,8 @@
   import api from '../services/api'
   export const getGoods = (payload) => {
     return dispatch => {
-      api.get('/searchJingDong',payload).then((res) => {
+      // api.get('/searchJingDong',payload).then((res) => {
+        api.get('/searchgoodsjd',payload).then((res) => {
         debugger
         const { isInit } = payload
         if(isInit === '0'){

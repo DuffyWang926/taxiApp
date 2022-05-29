@@ -4,7 +4,7 @@ import { logError } from '../utils/error'
 
 // import {baseUrl} from '../../config'
 
-const baseUrl= 'https://www.mengshikejiwang.top/taxiapi'
+const baseUrl= 'https://www.mengshikejiwang.top/taxiapi' 
 // const baseUrl= 'http://127.0.0.1:3001/taxiapi'
 
 

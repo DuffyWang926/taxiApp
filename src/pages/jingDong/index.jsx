@@ -51,21 +51,24 @@ export default class Index extends Component {
   }
   initData = async ()=>{
     const { getGoodsParams, getGoodsUrlParams } = this.props
+    debugger
     await this.props.getGoods(getGoodsParams)
-    await this.props.getGoods(getGoodsUrlParams)
+    // debugger
+
+    // await this.props.getGoods(getGoodsUrlParams)
 
   }
   onGoodClick = (v,i) =>{
     const { goodsUrlList } = this.props
-    const { buyUrl, couponUrl } = v
+    const { buyUrl, couponUrl } = v || {}
     let url = ''
     if(couponUrl){
       url = couponUrl
     }else if(buyUrl){
       url = buyUrl
-    }else{
+    }else{ 
       let item = goodsUrlList[i]
-      const { buyUrl, couponUrl } = item
+      const { buyUrl, couponUrl } = item || {}
       if(couponUrl){
         url = couponUrl
       }else if(buyUrl){
