@@ -15,6 +15,7 @@ export default {
     'pages/dianFei/index',
     'pages/recommend/index',
     'pages/goodJing/index',
+    'pages/clientService/index',
     'pages/search/index'
   ],
   window: {

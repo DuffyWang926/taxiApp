@@ -198,8 +198,6 @@ export default class Index extends Component {
       let res = (<TypeCom props={v} key={i + "type"}></TypeCom>)
       return res
     })
-    
-
     const bannerListCom = Array.isArray(bannerList) && bannerList.map( (v,i) =>{
       const {imgSrc } = v
       let res = (<SwiperItem key={i + 'swiperItem'} >
