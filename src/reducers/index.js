@@ -7,5 +7,5 @@ import mine from './mine'
 export default combineReducers({
   home,
   search,
-  mine
+  mine,
 })
