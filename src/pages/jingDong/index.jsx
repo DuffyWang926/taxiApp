@@ -40,6 +40,13 @@ const mapDispatchToProps = (dispatch) =>{
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
 
+  constructor(props){
+    super(props)
+    this.state={
+      searchValue:''
+    }
+  }
+
   componentDidMount(){
     let url = window.location.href
     let code = getUrlCode(url)
@@ -51,9 +58,7 @@ export default class Index extends Component {
   }
   initData = async ()=>{
     const { getGoodsParams, getGoodsUrlParams } = this.props
-    debugger
     await this.props.getGoods(getGoodsParams)
-    // debugger
 
     // await this.props.getGoods(getGoodsUrlParams)
 
@@ -75,9 +80,23 @@ export default class Index extends Component {
         url = buyUrl
       }
     }
-    debugger
     window.location.href = url
   }
+  onSearch = () =>{
+    const { searchValue } = this.state
+    let { getGoodsParams, getGoodsUrlParams } = this.props
+    if(searchValue){
+      getGoodsParams.keyword = searchValue
+      this.props.getGoods(getGoodsParams)
+    }
+  }
+  onInputChange = (e) =>{
+    let value = e.target.value
+    this.setState({
+      searchValue:value
+    })
+  }
+  
 
 
   
@@ -89,7 +108,6 @@ export default class Index extends Component {
     const title = '京东'
     let goodsNode = Array.isArray(goodsList) && goodsList.map( (v,i) =>{
       const {
-        
         imgSrc,
         price,
         returnMoney,
@@ -125,8 +143,8 @@ export default class Index extends Component {
             {title}
           </View>
           <View className='searchBox'>
-            <Input className='searchInput'/>
-            <View className='searchBtn'>
+            <Input className='searchInput' onInput={this.onInputChange}/>
+            <View className='searchBtn' onClick={this.onSearch}>
               搜索
             </View>
           </View>
