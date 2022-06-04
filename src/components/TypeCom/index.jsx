@@ -11,6 +11,7 @@ const xingBaKeImg = require("../../assets/logo/logo5.jpg")
 const kenDeJiImg = require("../../assets/logo/logo6.jpg")
 const qianZhuImg = require("../../assets/logo/logo7.jpg")
 const dianFeiImg = require("../../assets/logo/logo8.png")
+const goodJingImg = require("../../assets/logo/logo9.jpg")
 
 
 
@@ -33,7 +34,10 @@ const TypeItem = ({props}) => {
     imgSrc = qianZhuImg
   }else if(typeId == 8){
     imgSrc = dianFeiImg
+  }else if(typeId == 9){
+    imgSrc = goodJingImg
   }
+  
   
   const typeClick = () =>{
     const { url } = props

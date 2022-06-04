@@ -17,7 +17,7 @@
     goodsUrlList:[],
   }
   
-  export default function home (state = INITIAL_STATE, action) {
+  export default function goodJing (state = INITIAL_STATE, action) {
     if(action.type ===  "JINGDONGGOODS"){
       const { data } = action.payload
       const { goodsList } = data

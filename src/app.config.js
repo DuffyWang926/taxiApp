@@ -14,8 +14,8 @@ export default {
     'pages/qianZhu/index',
     'pages/dianFei/index',
     'pages/recommend/index',
-    'pages/clientservice/index',
-    'pages/jingDong/index',
+    'pages/goodJing/index',
+    'pages/clientService/index',
     'pages/search/index'
   ],
   window: {

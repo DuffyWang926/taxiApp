@@ -188,16 +188,19 @@ export default class Index extends Component {
         url:'pages/dianFei/index',
         title:'充电费'
       },
+      {
+        typeId:9,
+        url:'pages/goodJing/index',
+        title:'京东'
+      },
     ]
     const typeListCom = Array.isArray(typeProps) && typeProps.map( (v,i) =>{
       let res = (<TypeCom props={v} key={i + "type"}></TypeCom>)
       return res
     })
-    
-
     const bannerListCom = Array.isArray(bannerList) && bannerList.map( (v,i) =>{
       const {imgSrc } = v
-      let res = (<SwiperItem key='SwiperItem1' key={i + 'swiperItem'} >
+      let res = (<SwiperItem key={i + 'swiperItem'} >
       <Image src={imgSrc} className='homeImg' ></Image>
     </SwiperItem>)
       return res

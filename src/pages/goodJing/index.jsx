@@ -10,12 +10,12 @@ import {
 } from "../../actions/home";
 import {
   getGoods,
-} from "../../actions/jingDong";
+} from "../../actions/goodJing";
 const bannerImg = require("../../assets/banner/banner1.png")
 const mapStateToProps = (state)=>{
-  const { home, jingDong } = state
+  const { home, goodJing } = state
   const { userId } = home
-  const { getGoodsParams, goodsList, getGoodsUrlParams, goodsUrlList } = jingDong
+  const { getGoodsParams, goodsList, getGoodsUrlParams, goodsUrlList } = goodJing
 
 
   return {
@@ -96,11 +96,6 @@ export default class Index extends Component {
       searchValue:value
     })
   }
-  
-
-
-  
-
   
 
   render () {
