@@ -29,7 +29,6 @@
     }else if(action.type ===  "JINGDONGGOODSURL"){
       const { data } = action.payload
       const { goodsList } = data
-      debugger
       return {
         ...state,
         goodsUrlList:goodsList
