@@ -43,8 +43,6 @@ export default class Index extends Component {
     }
   }
 
-<<<<<<< HEAD
-=======
 
 
   onRedClick = () =>{
@@ -68,7 +66,6 @@ export default class Index extends Component {
 
   
 
->>>>>>> dev
   render () {
     const title = '滴滴'
     const btnProps = {
