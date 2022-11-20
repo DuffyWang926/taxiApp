@@ -183,15 +183,20 @@ export default class Index extends Component {
         url:'pages/qianZhu/index',
         title:'千猪电影'
       },
+      // {
+      //   typeId:8,
+      //   url:'pages/dianFei/index',
+      //   title:'充电费'
+      // },
+      // {
+      //   typeId:9,
+      //   url:'pages/goodJing/index',
+      //   title:'京东'
+      // },
       {
-        typeId:8,
-        url:'pages/dianFei/index',
-        title:'充电费'
-      },
-      {
-        typeId:9,
-        url:'pages/goodJing/index',
-        title:'京东'
+        typeId:10,
+        url:'pages/package/index',
+        title:'快递'
       },
     ]
     const typeListCom = Array.isArray(typeProps) && typeProps.map( (v,i) =>{

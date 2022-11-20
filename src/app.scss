@@ -41,7 +41,17 @@ html,body{
             border-radius: 50px;
         }
     }
-}
+    .pageSwiperHeightImg{
+        margin:-50px 0 0 0;
+        width: 100%;
+        height: auto;
+        padding: 0 10px;
+        box-sizing: border-box;
+        img{
+            border-radius: 50px;
+        }
+    }
+ }   
 
 .pageBanner{
     padding:50px 0;
@@ -50,5 +60,14 @@ html,body{
     height: 300px;
     img{
         border-radius: 50px;
+    }
+}
+.globalInput{
+    flex:1;
+    border: 1px solid #aaa;
+    text-align: left;
+    border-radius: 50px;
+    input{
+        text-indent:20px;
     }
 }

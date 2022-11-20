@@ -67,9 +67,18 @@
                 overflow : hidden;
                 font-size: 48px;
             }
-            .goodPrice{
-                color: #e1251b;
-                font-weight: 700;
+            .price{
+                text-align: left;
+                .oldPrice{
+                    text-decoration: line-through;
+                    padding:0 20px 0 0;
+
+                }
+                .nowPrice{
+                    color: #e1251b;
+                    font-weight: 700;
+                }
+                
             }
             .goodShop{
                 font-size: 40px;

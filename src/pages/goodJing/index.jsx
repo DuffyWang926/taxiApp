@@ -10,6 +10,7 @@ import {
 } from "../../actions/home";
 import {
   getGoods,
+  getJDGoods,
 } from "../../actions/goodJing";
 const bannerImg = require("../../assets/banner/banner1.png")
 const mapStateToProps = (state)=>{
@@ -35,6 +36,10 @@ const mapDispatchToProps = (dispatch) =>{
     getGoods:(payload)=>{
       dispatch(getGoods(payload));
     },
+    getJDGoods:(payload)=>{
+      dispatch(getJDGoods(payload));
+    },
+    
   }
 }
 @connect( mapStateToProps , mapDispatchToProps )
@@ -58,26 +63,28 @@ export default class Index extends Component {
   }
   initData = async ()=>{
     const { getGoodsParams, getGoodsUrlParams } = this.props
-    await this.props.getGoods(getGoodsParams)
+    // await this.props.getGoods(getGoodsParams)
+    // await this.props.getJDGoods(getGoodsParams)
+    
 
     // await this.props.getGoods(getGoodsUrlParams)
 
   }
   onGoodClick = (v,i) =>{
     const { goodsUrlList } = this.props
-    const { buyUrl, couponUrl } = v || {}
+    const { link, couponLink } = v || {}
     let url = ''
-    if(couponUrl){
-      url = couponUrl
-    }else if(buyUrl){
-      url = buyUrl
+    if(couponLink){
+      url = couponLink
+    }else if(link){
+      url = link
     }else{ 
       let item = goodsUrlList[i]
-      const { buyUrl, couponUrl } = item || {}
-      if(couponUrl){
-        url = couponUrl
-      }else if(buyUrl){
-        url = buyUrl
+      const { link, couponLink } = item || {}
+      if(couponLink){
+        url = couponLink
+      }else if(link){
+        url = link
       }
     }
     window.location.href = url
@@ -97,35 +104,37 @@ export default class Index extends Component {
     })
   }
   
+  
 
   render () {
     const { goodsList } = this.props
     const title = '京东'
     let goodsNode = Array.isArray(goodsList) && goodsList.map( (v,i) =>{
       const {
-        imgSrc,
-        price,
-        returnMoney,
-        returnRate,
+        imgUrl,
+        oldPrice,
+        nowPrice,
+        makeMoney,
         shop,
         title,
       } = v
       let res = (
         <View className='goodsItem' key={i + 'jingdong'} onClick={() => this.onGoodClick(v,i)}>
           <View className='goodImgBox'>
-            <Image src={imgSrc} className='goodImg' ></Image>
+            <Image src={imgUrl} className='goodImg' ></Image>
           </View>
           <View className='goodTitle'>
             {title}
           </View>
-          <View className='goodPrice'>
-            ￥{price}
+          <View className='price'>
+            <span className='oldPrice'>￥{oldPrice}</span>
+            <span className='nowPrice'>￥{nowPrice}</span>
           </View>
-          <View className='goodShop'>
+          { shop && <View className='goodShop'>
             {shop}
-          </View>
-          <View className='goodReturn'>
-            赚 ￥<span className='goodReturnMoney'>{returnMoney}</span>
+          </View>}
+          <View className='goodReturn' >
+            赚 ￥<span className='goodReturnMoney'>{makeMoney}</span>
           </View>
         </View>
       )
@@ -138,7 +147,7 @@ export default class Index extends Component {
             {title}
           </View>
           <View className='searchBox'>
-            <Input className='searchInput' onInput={this.onInputChange}/>
+            <Input className='globalInput' onInput={this.onInputChange}/>
             <View className='searchBtn' onClick={this.onSearch}>
               搜索
             </View>
