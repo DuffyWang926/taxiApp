@@ -8,9 +8,10 @@ import {
 } from "../../actions/home";
 const mapStateToProps = (state)=>{
   const { home } = state
-  const { userId } = home
+  const { userId, openid } = home
   return {
-    userId
+    userId,
+    openid
   }
 }
 const mapDispatchToProps = (dispatch) =>{
@@ -26,7 +27,7 @@ const mapDispatchToProps = (dispatch) =>{
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
   onRedClick = () =>{
-    const { userId} = this.props
+    const { userId, openid} = this.props
     const { url } = this.props.data
 
     // if(!userId){
@@ -42,8 +43,8 @@ export default class Index extends Component {
     //   window.location.href = url
     // }
     let clickTime = new Date().getTime() + ''
-      this.props.recordTime({userId, clickTime})
-      window.location.href = url
+    this.props.recordTime({userId,openid, clickTime})
+    window.location.href = url
   }
   render(){
     const { msg } = this.props.data

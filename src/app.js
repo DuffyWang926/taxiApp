@@ -23,6 +23,7 @@ const store = configStore();
 // }
 
 const App = ({ children }) =>{
+  
   return (
     <Provider store={store}>
       {children}

@@ -84,7 +84,6 @@ export default class Index extends Component {
     // let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
     // let url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=https%3A%2F%2Fwww.mengshikejiwang.top%2F%23%2Fpages%2Fmine%2Findex&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'
     let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`
-    
     return (
       <View className='login'>
         <View className='loginTop'>

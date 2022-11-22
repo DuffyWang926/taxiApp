@@ -7,6 +7,8 @@ import { connect } from "../../utils/connect";
 import getUrlCode from "../../utils/getUrlCode";
 import {
   postLogin,
+  recordTime,
+  postLoginOpenid
 } from "../../actions/home";
 import {
   getGoods,
@@ -15,12 +17,13 @@ import {
 const bannerImg = require("../../assets/banner/banner1.png")
 const mapStateToProps = (state)=>{
   const { home, goodJing } = state
-  const { userId } = home
+  const { userId, openid } = home
   const { getGoodsParams, goodsList, getGoodsUrlParams, goodsUrlList } = goodJing
 
 
   return {
     userId,
+    openid,
     getGoodsParams,
     getGoodsUrlParams,
     goodsList,
@@ -30,14 +33,17 @@ const mapStateToProps = (state)=>{
 }
 const mapDispatchToProps = (dispatch) =>{
   return {
-    postLogin:(payload)=>{
-      dispatch(postLogin(payload));
+    postLoginOpenid:(payload)=>{
+      dispatch(postLoginOpenid(payload));
     },
     getGoods:(payload)=>{
       dispatch(getGoods(payload));
     },
     getJDGoods:(payload)=>{
       dispatch(getJDGoods(payload));
+    },
+    recordTime:(payload)=>{
+      dispatch(recordTime(payload));
     },
     
   }
@@ -53,10 +59,11 @@ export default class Index extends Component {
   }
 
   componentDidMount(){
+    const { openid } = this.props
     let url = window.location.href
     let code = getUrlCode(url)
-    if(code){
-      this.props.postLogin({code})
+    if(code && !openid){
+      this.props.postLoginOpenid({code})
     }
     this.initData()
     
@@ -64,15 +71,18 @@ export default class Index extends Component {
   initData = async ()=>{
     const { getGoodsParams, getGoodsUrlParams } = this.props
     // await this.props.getGoods(getGoodsParams)
-    // await this.props.getJDGoods(getGoodsParams)
+    await this.props.getJDGoods(getGoodsParams)
     
 
     // await this.props.getGoods(getGoodsUrlParams)
 
   }
   onGoodClick = (v,i) =>{
-    const { goodsUrlList } = this.props
+    const { goodsUrlList, userId, openid } = this.props
+    debugger
     const { link, couponLink } = v || {}
+    let clickTime = new Date().getTime() + ''
+    this.props.recordTime({userId,openid, clickTime, goodName:v.title})
     let url = ''
     if(couponLink){
       url = couponLink
@@ -87,14 +97,17 @@ export default class Index extends Component {
         url = link
       }
     }
+
     window.location.href = url
   }
   onSearch = () =>{
     const { searchValue } = this.state
     let { getGoodsParams, getGoodsUrlParams } = this.props
+    debugger
     if(searchValue){
-      getGoodsParams.keyword = searchValue
-      this.props.getGoods(getGoodsParams)
+      getGoodsParams.goodName = searchValue
+      // this.props.getGoods(getGoodsParams)
+      this.props.getJDGoods(getGoodsParams)
     }
   }
   onInputChange = (e) =>{
@@ -108,6 +121,7 @@ export default class Index extends Component {
 
   render () {
     const { goodsList } = this.props
+    
     const title = '京东'
     let goodsNode = Array.isArray(goodsList) && goodsList.map( (v,i) =>{
       const {
@@ -118,6 +132,10 @@ export default class Index extends Component {
         shop,
         title,
       } = v
+      const btnProps = {
+        msg:[],
+        url:"https://activity01.yunzhanxinxi.com/link/426441e5060dafbf0a675c0c19a3b74a"
+      }
       let res = (
         <View className='goodsItem' key={i + 'jingdong'} onClick={() => this.onGoodClick(v,i)}>
           <View className='goodImgBox'>

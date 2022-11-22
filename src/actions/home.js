@@ -21,6 +21,15 @@ export const postLogin = (payload) => {
     // }
   }
 }
+export const postLoginOpenid = (payload) => {
+  return async dispatch => {
+    let res = await api.post('/getopenid',payload)
+    dispatch({
+      type: 'OPENID',
+      payload: res
+    })
+  }
+}
 
 export const changeHomeData = (payload) => {
   return {
@@ -29,17 +38,11 @@ export const changeHomeData = (payload) => {
   }
 }
 
+
 export const recordTime = (payload) => {
-  return {
-    type: 'CHANGEHOMEDATA',
-    payload
+  return async dispatch => {
+    await api.post('/recordTime',payload)
+    
   }
 }
-
-// export const recordTime = (payload) => {
-//   return async dispatch => {
-//     let res = await api.post('/recordTime',payload)
-    
-//   }
-// }
   
