@@ -3,6 +3,7 @@
   
   const INITIAL_STATE = {
     imgData:'',
+    userAccount:{}
   }
   
   export default function home (state = INITIAL_STATE, action) {
@@ -16,7 +17,18 @@
         imgData,
       }
 
+    }else if(action.type == 'USERACCOUNT'){
+      const { data = {} } = action.payload
+      const { userAccount } = data
+     
+
+      return {
+        ...state,
+        userAccount,
+      }
+
     }
+    
     return state
     
   }

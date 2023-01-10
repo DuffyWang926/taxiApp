@@ -7,7 +7,7 @@ import { connect } from "../../utils/connect";
 import {
   postLogin
 } from "../../actions/home";
-import getUrlCode from "../../utils/getUrlCode";
+import {getUrlCode} from "../../utils/getUrlCode";
 
 const logoImg = require("../../assets/logo/logo.jpg")
 const mapStateToProps = (state)=>{
@@ -29,9 +29,7 @@ export default class Index extends Component {
 
   constructor(){
     super()
-    const { oldUrl } = getCurrentInstance()?.router?.params || {};
     this.state={
-      oldUrl,
       upCode:''
     }
   }
@@ -75,15 +73,19 @@ export default class Index extends Component {
     // let encodeUrl = encodeURIComponent(redirectUrl)
     // let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeUrl}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`
 
-    // const { oldUrl = '/pages/index/index', upCode } = this.state
-    const { oldUrl = '/pages/mine/index', upCode } = this.state
-    let redirectUrl = 'https://www.mengshikejiwang.top/#' + oldUrl + '?upCode=' + upCode
+    const { upCode } = this.state
+    // let redirectUrl = 'https://www.mengshikejiwang.top' + oldUrl + '?upCode=' + upCode
+    
+    let redirectUrl = 'https://www.mengshikejiwang.top' + '?upCode=' + upCode + '&type=' + 1
+    // let redirectUrl = 'https://www.mengshikejiwang.top' + '?type=' + 0
     console.log('redirectUrl', redirectUrl)
     let REDIRECT_URI = encodeURIComponent(redirectUrl)
+    // let REDIRECT_URI = redirectUrl
     console.log('REDIRECT_URI', REDIRECT_URI)
     // let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
     // let url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=https%3A%2F%2Fwww.mengshikejiwang.top%2F%23%2Fpages%2Fmine%2Findex&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'
     let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe52a97ff5cbcfc9a&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect`
+    console.log(url)
     return (
       <View className='login'>
         <View className='loginTop'>

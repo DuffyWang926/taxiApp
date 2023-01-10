@@ -6,7 +6,7 @@ import './index.scss'
 import { connect } from "../../utils/connect";
 
 import { history } from '@tarojs/router'
-import getUrlCode from "../../utils/getUrlCode";
+import {getUrlCode} from "../../utils/getUrlCode";
 import {
   postLogin,
   recordTime
@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch) =>{
 export default class Index extends Component {
   componentDidMount(){
     let url = window.location.href
-    let code = getUrlCode(url)
+    let {code} = getUrlCode(url)
     if(code){
       this.props.postLogin({code})
     }

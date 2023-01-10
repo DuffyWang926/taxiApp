@@ -27,23 +27,11 @@ const mapDispatchToProps = (dispatch) =>{
 @connect( mapStateToProps , mapDispatchToProps )
 export default class Index extends Component {
   onRedClick = () =>{
-    const { userId, openid} = this.props
+    const { openid} = this.props
     const { url } = this.props.data
-
-    // if(!userId){
-    //   const { path } = getCurrentInstance()?.router || {};
-    //   let url = 'pages/login/index?oldUrl=' + path
-    //   Taro.navigateTo({
-    //     url
-    //   })
-    // }else{
-    //   let clickTime = new Date().getTime() + ''
-    //   this.props.recordTime({userId, clickTime})
-    //   let url = "https://activity01.yunzhanxinxi.com/link/68b1e80d30b996baea1acb9200ec5b01"
-    //   window.location.href = url
-    // }
+    debugger
     let clickTime = new Date().getTime() + ''
-    this.props.recordTime({userId,openid, clickTime})
+    this.props.recordTime({openid, clickTime})
     window.location.href = url
   }
   render(){

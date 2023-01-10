@@ -1,11 +1,12 @@
 
-
+import Taro from '@tarojs/taro'
   
   const INITIAL_STATE = {
     getGoodsParams:{
       goodName:'面膜',
       isInit:'0',
-      num:4,
+      lastNum:0,
+      num:2,
       pageNum:1
     },
     getGoodsUrlParams:{
@@ -13,14 +14,48 @@
       isInit:'1',
       size:4
     },
-    // goodsList:[],
-    // goodsList:[{"imgSrc":"https://img14.360buyimg.com/n1/jfs/t1/145385/13/14267/137822/5fae2976E61fc0b1e/dc4e27f0a7d02dcd.jpg","buyUrl":"","title":"钙尔奇（Caltrate）液体钙 补钙 VD钙片 维生素软胶囊 90粒 新老包装随机发","price":"69","returnRate":0.2,"returnMoney":"12.42","couponUrl":"","shop":"善存钙尔奇京东自营旗舰店"},{"imgSrc":"https://img14.360buyimg.com/n1/jfs/t1/89142/21/26473/391710/624648eeE17e64f02/fd33e8d8997230fb.jpg","buyUrl":"","title":"钙尔奇 添佳片补钙片男女 中老年成人维生素D3碳酸钙片男女 300片优惠装 新老包装随机发","price":"189","returnRate":0.2,"returnMoney":"34.02","couponUrl":"","shop":"善存钙尔奇京东自营旗舰店"},{"imgSrc":"https://img14.360buyimg.com/n1/jfs/t1/174136/23/5350/547877/607d3596E3376f30b/bb07c52e4462b235.jpg","buyUrl":"","title":"中华创世神话选注·神的起源卷（套装共2册）","price":"199.99","returnRate":0.01,"returnMoney":"1.80","couponUrl":"","shop":""},{"imgSrc":"https://img14.360buyimg.com/n1/jfs/t1/139198/12/2539/202264/5f08116eE9564e6c5/bf9f513b0f19fdd7.jpg","buyUrl":"","title":"【免保参拍】琥珀蜜蜡满蜡老蜡双面带皮算盘珠DIY手串  配绿松石桶珠","price":"501","returnRate":0.01,"returnMoney":"4.51","couponUrl":"","shop":"正河珠宝"}],
-    goodsList:[{"imgUrl":"https://img14.360buyimg.com/pop/jfs/t1/110349/4/31651/62967/6364e9e6E9a5d277e/962457f578b91997.jpg","title":" 夸迪 玻尿酸紧致赋能精华面膜保湿补水收缩毛孔滋润女华熙生物 紧致赋活面膜20g*15片 ","oldPrice":"￥159.00","nowPrice":"￥59.00","makeMoney":"￥6.49","makeMoneyPercent":"11%","couponMoney":"100.00元","link":" https://union-click.jd.com/jdc?e=1003913822&p=JF8BAZQJK1olXwUAVVtaC0IRAF8IGloSXwEDV1hVCE0fBF9MRANLAjZbERscSkAJHTRQRA1CCVkdDwtCWhVLHTdNTwcKBENeCVAfUg8bA24JHFkSXAUEXF5bAEwAQ2N8YitwKV9pCio0cC9uYAxJbSJ9BWJmBhgqUBZuYSZsXSxwLnZlDj4UfwMWYw0JZxt1FVxlNl8hTjx1eB18byxCK396ByoEYwphahdQfwFlG2VgMz0JCzdpczB8cjhcGwN0PT40axJCXA9xez12FGVeIzcPYT9kY3sLbCx8IWN2NzpJCzxgehx6YDhcHnB7BjoqQUtTdBt8D1lgbQUDAlsvDBFEYDBYHStIX3sFBgsrfjsbD18JK1sUXAUCVFteAEgnUD1dHF4SDVUBXV4ODksTVmcBGVglXQYyFTBdCEoXAGY4GmsVWgELXF5ZCkkRBWwMK1sdWjZbBAELURMWAm84K2sWbQYDVVxVCEkeAGw4K1sWbQUyCjBcW00fBmZYHjVIDVhHVgBYUiUVAG4OElITXAcyVl9cCkknMw ","couponLink":""}],
+    goodsList:[
+      {
+        "imgUrl":"https://img14.360buyimg.com/pop/jfs/t1/123618/32/34520/144868/63b52a89Fda9351b8/8ef8253a72fe8770.jpg",
+        "title":" 珀莱雅面膜 小球藻面膜 保湿海藻面膜补水面膜女男33片 ",
+        "oldPrice":"79.00","nowPrice":"79.00","makeMoney":"2.84",
+        "makeMoneyPercent":"6%","couponMoney":"0.00元",
+        "link":" https://union-click.jd.com/jdc?e=1003913822&p=JF8BAOYJK1olXwUGXF9cDkgQB18PH1IUWwEFZBoCUBVIMzZNXhpXVhgcDBsJVFRMVnBaRQcLWgILVVhaD1RORjNVKxhMBk0KESA4aBRfaGYNbCBJDlBHED5RBHsWM28JGlgVXQMBXF1tWxlCBGoPSwgWVAZRUl5ZXUMeAWw4G1slH2hZATBaXU0TBz8NHglFW1UBZF9tCEwRAGYAGl4dXgMDV25dAEwnWj9XTQJNXAcCZG5tC3sXAm4KE1sXVAUBZG5dOEgnXQEJSF0XXFVVUzAAWhNMRm8NHTUVXAcFXV5cCUInAW4JGVklbQ ",
+        "couponLink":""
+      },
+      {
+        "imgUrl":"https://img14.360buyimg.com/pop/jfs/t1/179695/12/3553/195427/609b4c13E8eccb0c4/1b54f26080d475d8.jpg",
+        "title":" 【进口原料】海藻补水润泽面膜30片保湿提亮提拉紧致学生女面膜收缩毛孔护肤品敏感肌痘印 海藻面膜 ",
+        "oldPrice":"129.90","nowPrice":"29.90","makeMoney":"6.26",
+        "makeMoneyPercent":"36%",
+        "couponMoney":"100.00元",
+        "link":" https://union-click.jd.com/jdc?e=1003913822&p=JF8BAOYJK1olXwUGXF9cDkgQB18PH1IUWwEFZBoCUBVIMzZNXhpXVhgcDBsJVFRMVnBaRQcLWgILVVhaD1RORjNVKxp1XQ9bNjsBayJlAmwPBShNG19KVxhRBHsWM28JGlgVXQMBXF1tWxlCBGoPSwgWVAZRUl5ZXUMeAWw4G1slH2hZATBaXU0TBz8NHglFW1UBZF9tCEwRAGYAGl4dWAMBV25dAEwnWj9XTQJNXAcCZG5tC3sXAm4KE1sXVAUBZG5dOEgnXQEJSF5HCQIAUTAAWhNMRmxWTzUVXQMBV19VDk4nAW4JGVklbQ ",
+        "couponLink":""
+      },
+      {
+        "imgUrl":"https://img14.360buyimg.com/pop/jfs/t1/30123/36/16914137/128818/63b61672F589e5518/e8ff93aea1edfb0d.jpg",
+        "title":" JMsolution肌司研水光补水保湿面膜韩国进口玻尿酸收缩毛孔JM面膜10片/盒 ",
+        "oldPrice":"80.00","nowPrice":"80.00","makeMoney":"1.44",
+        "makeMoneyPercent":"3%","couponMoney":"0.00元",
+        "link":" https://union-click.jd.com/jdc?e=1003913822&p=JF8BAOYJK1olXwUGXF9cDkgQB18PH1IUWwEFZBoCUBVIMzZNXhpXVhgcDBsJVFRMVnBaRQcLWgILVVhaD1RORjNVKwEQFRxlDhkgaEhPUT0Keg5UKlFkEBhRBHsWM28JGlgVXQMBXF1tWxlCBGoPSwgWVAZRUl5ZXUMeAWw4G1slH2hZATBaXU0TBz8NHglFW1UBZF9tCEwRAGYAGl4dWgIFXG5dAEwnWj9XTQJNXAcCZG5tC3sXAm4KE1sXVAUBZG5dOEgnXQEJSFMVXARXXDAAWhNMRmpaGzUVXQQKU19dDUsnAW4JGVklbQ ",
+        "couponLink":""
+      },
+      {
+        "imgUrl":"https://img14.360buyimg.com/pop/jfs/t1/66056/38/17797/56051/63aebe31Fd568f911/89441c8055e7cd59.jpg",
+        "title":" WIS玻尿酸面膜24片 三重玻尿酸熬夜补水保湿面膜修护舒缓敏感肌可用 ",
+        "oldPrice":"139.00","nowPrice":"139.00","makeMoney":"0.83",
+        "makeMoneyPercent":"1%","couponMoney":"0.00元",
+        "link":" https://union-click.jd.com/jdc?e=1003913822&p=JF8BAOYJK1olXwUGXF9cDkgQB18PH1IUWwEFZBoCUBVIMzZNXhpXVhgcDBsJVFRMVnBaRQcLWgILVVhaD1RORjNVKyhdWHoGLysdbTdtXBpJaBMRD2QLIwhRBHsWM28JGlgVXQMBXF1tWxlCBGoPSwgWVAZRUl5ZXUMeAWw4G1slH2hZATBaXU0TBz8NHglFW1UBZF9tCEwRAGYAGl4dVAEFUm5dAEwnWj9XTQJNXAcCZG5tC3sXAm4KE1sXVAUBZG5dOEgnXQEJSF0XXQMFUjAAWhNMRmtAEzUVXAcFXFddCEInAW4JGVklbQ ",
+        "couponLink":""
+      }
+    ],
     goodsUrlList:[],
 
   }
   
   export default function goodJing (state = INITIAL_STATE, action) {
+    Taro.hideLoading()
+
     if(action.type ===  "JINGDONGGOODS"){
       const { data } = action.payload
       const { dataList } = data

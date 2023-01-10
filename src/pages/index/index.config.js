@@ -1,4 +1,4 @@
 export default {
-  navigationBarTitleText: '打车券梦想号',
+  navigationBarTitleText: '梦都电商生活',
 
 }

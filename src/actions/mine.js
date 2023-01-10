@@ -12,13 +12,20 @@ export const getCodeImg = (payload) => {
 
 export const getSearchData = (payload) => {
   return async dispatch => {
-    let res = await api.get('/searchData',payload)
-    // dispatch({
-    //   type: 'CODEIMG',
-    //   payload: res
-    // })
+    await api.get('/searchData',payload)
   }
 }
+
+export const getUserAccount = (payload) => {
+  return async dispatch => {
+    let res = await api.post('/userAccount',payload)
+    dispatch({
+      type: 'USERACCOUNT',
+      payload: res
+    })
+  }
+}
+
 
   
   

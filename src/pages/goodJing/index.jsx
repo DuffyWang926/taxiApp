@@ -4,7 +4,7 @@ import { View, Input, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
-import getUrlCode from "../../utils/getUrlCode";
+import {getUrlCode} from "../../utils/getUrlCode";
 import {
   postLogin,
   recordTime,
@@ -61,7 +61,7 @@ export default class Index extends Component {
   componentDidMount(){
     const { openid } = this.props
     let url = window.location.href
-    let code = getUrlCode(url)
+    let {code} = getUrlCode(url)
     if(code && !openid){
       this.props.postLoginOpenid({code})
     }
@@ -70,9 +70,13 @@ export default class Index extends Component {
   }
   initData = async ()=>{
     const { getGoodsParams, getGoodsUrlParams } = this.props
+    debugger
+    Taro.showLoading({
+      title: '加载中……',
+    })
     // await this.props.getGoods(getGoodsParams)
-    await this.props.getJDGoods(getGoodsParams)
-    
+
+    this.props.getJDGoods(getGoodsParams)
 
     // await this.props.getGoods(getGoodsUrlParams)
 
@@ -165,7 +169,7 @@ export default class Index extends Component {
             {title}
           </View>
           <View className='searchBox'>
-            <Input className='globalInput' onInput={this.onInputChange}/>
+            <Input className='globalInput' onInput={this.onInputChange} placeholder='面膜'/>
             <View className='searchBtn' onClick={this.onSearch}>
               搜索
             </View>

@@ -4,7 +4,7 @@ import { View, Text, Swiper, SwiperItem, Image } from '@tarojs/components'
 // import { AtIcon, AtButton, AtToast } from "taro-ui";
 import './index.scss'
 import { connect } from "../../utils/connect";
-import getUrlCode from "../../utils/getUrlCode";
+import {getUrlCode} from "../../utils/getUrlCode";
 import {
   postLogin,
   recordTime

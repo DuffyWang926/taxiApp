@@ -6,7 +6,7 @@ import './index.scss'
 import { connect } from "../../utils/connect";
 
 import { history } from '@tarojs/router'
-import getUrlCode from "../../utils/getUrlCode";
+import {getUrlCode} from "../../utils/getUrlCode";
 import {
   postLogin,
   recordTime
@@ -21,9 +21,9 @@ const footImgC = require("../../assets/meiTuan/pinZhi.jpg")
 const mapStateToProps = (state)=>{
   
   const { home } = state
-  const { userId } = home
+  const { openid } = home
   return {
-    userId
+    openid
   }
 
 }
@@ -54,7 +54,7 @@ export default class Index extends Component {
     const title = '美团'
     const btnProps = {
       msg:'领红包点外卖',
-      url:"https://activity01.yunzhanxinxi.com/link/426441e5060dafbf0a675c0c19a3b74a"
+      url:"https://activity01.yunzhanxinxi.com/link/426441e5060dafbf0a675c0c19a3b74a",
     }
     const bannerList = [
       bannerImgA,

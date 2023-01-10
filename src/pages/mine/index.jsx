@@ -11,7 +11,8 @@ import {
 
 } from "../../actions/home";
 import {
-  getSearchData
+  getSearchData,
+  getUserAccount
 
 } from "../../actions/mine";
 
@@ -19,19 +20,21 @@ const moneyImg = require("../../assets/icon/money.png")
 const portraitImg = require("../../assets/portrait.svg")
 const shareImg = require("../../assets/icon/share.svg")
 const clientImg = require("../../assets/icon/clientService.svg")
-import getUrlCode from "../../utils/getUrlCode";
+import {getUrlCode} from "../../utils/getUrlCode";
 const mapStateToProps = (state)=>{
-  const { home } = state
+  const { home, mine } = state
   const { userInfo = {},   } = home
   const { nickname, headimgurl, openid, upCode, userCode } = userInfo
+  const { userAccount } = mine
   
-    return {
-      nickname,
-      headimgurl,
-      openid,
-      userCode,
-      upCode
-    }
+  return {
+    nickname,
+    headimgurl,
+    openid,
+    userCode,
+    upCode,
+    userAccount
+  }
 
 }
 const mapDispatchToProps = (dispatch) =>{
@@ -45,6 +48,10 @@ const mapDispatchToProps = (dispatch) =>{
     getSearchData:(payload)=>{
       dispatch(getSearchData(payload));
     },
+    getUserAccount:(payload)=>{
+      dispatch(getUserAccount(payload));
+    },
+    
     
     
   }
@@ -65,11 +72,15 @@ export default class Index extends Component {
   }
 
   componentDidMount(){
+    // const { openid = "orSyY5qOA4cMQy-SMm_cHtj8zEFg" } = this.props
+    const { openid  } = this.props
     this.props.getSearchData()
+    if(openid){
+      this.props.getUserAccount({openid})
+    }
+    
     this.props.changeHomeData({ tapCurrent:2})
   }
-
-  
 
   loginClick = async () =>{
     const { path } = getCurrentInstance()?.router || {};
@@ -112,7 +123,14 @@ export default class Index extends Component {
   
 
   render () {
-    const { nickname, headimgurl, upCode, userCode } = this.props
+
+    
+    // let userInfoLast = sessionStorage.getItem("userInfo")
+    // let userInfo = JSON.parse(userInfoLast)
+    // let { nickname, headimgurl, upCode, userCode, openid } = userInfo || {}
+    let { nickname, headimgurl, upCode, userCode, openid, userAccount = {} } = this.props || {}
+    const { amount } = userAccount
+
     let portraitImgSrc = headimgurl || portraitImg
     return (
       <View className='mine'>
@@ -128,6 +146,7 @@ export default class Index extends Component {
               }
               <View>ID:{userCode}</View>
               <View>推荐人:{upCode}</View>
+              <View>openid:{openid}</View>
             </View>
           </View>
           <View className='mineInfoRight' onClick={this.onShare}>
@@ -139,7 +158,7 @@ export default class Index extends Component {
         <View className='mineMoney'>
           <View className='moneyType'>
             <View className='moneySum'>
-              0.00
+              {amount}
             </View>
             <View className='moneyTitle'>
               累计收益

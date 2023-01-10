@@ -14,6 +14,7 @@
       const { userInfo = {} } = data
       const { userId = '', openid = '' } = userInfo
       sessionStorage.setItem("userId", userId);
+      sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
       return {
         ...state,
         userInfo,
